@@ -6,7 +6,7 @@ const ContactPage = () => {
   return (
     <main>
       <Header />
-      <section className="h-lvh">
+      <section className="h-lvh px-20">
         <h1> Contact Us</h1>
       </section>
 
