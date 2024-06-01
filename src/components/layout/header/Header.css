@@ -1,9 +1,30 @@
-.cart-item {
-  position: relative;
+.header-bg {
+  background-color: var(--bgDark);
 }
 
-.ordered-items {
+.logo-header {
+  font-family: "Poetsen One", sans-serif;
+  color: var(--brandColor);
+  font-size: 1.4rem;
+}
+
+nav li:hover {
+  color: var(--brandColor);
+}
+
+.cart-container {
   position: absolute;
-  top: -1.1rem;
-  right: 0;
+}
+.cart-items {
+  background-color: var(--grayMedium);
+  text-align: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 4rem;
+  font-size: 0.7rem;
+  line-height: 1.2rem;
+  position: relative;
+  top: -0.8rem;
+  right: -1.4rem;
+  color: var(--textLight);
 }
