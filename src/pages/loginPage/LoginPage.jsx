@@ -1,36 +1,60 @@
-
-import React from "react";
+import { useState } from "react";
 import "./LoginPage.css";
+import { Link } from "react-router-dom";
+import { loginToContentful } from "../../utils/clientLogin";
 
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      await loginToContentful(email, password);
+      // Handle successful login
+    } catch (err) {
+      setError("Invalid credentials");
+    }
+  };
+
   return (
     <main>
-      <div className="flex w-full h-screen">
-        <div className="w-full flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-semibold">Welcome to myCar</h1>
-          <div className=" bg-blue-900 text-white border-2 rounded-3xl p-10 mt-8">
-            <form  action="">
-              <div className="mt-8">
-                <label htmlFor="">User Name:</label>
-                <input className="w-full border-2 border-gray-100 rounded-lg p-2 text-sm" type="text" placeholder="Enter your Name"/>
-              </div>
-                
-              <div className="mt-4">
-                <label htmlFor="">Password:</label>
-                <input className="w-full border-2 border-gray-100 rounded-lg p-2 text-sm" type="Password" placeholder="Enter your password "/>
-              </div>
+       <section className="h-lvh px-20">
+        <h1> Welcome to Your Account </h1>
 
-              <button className="w-full mt-20 border-2 rounded-3xl px-10 py-2 bg-orange-400">Sign In</button>
-            </form>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-2"
+            />
           </div>
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border-2"
+            />
+          </div>
+          {error && <p>{error}</p>}
+          <button type="submit">Login</button>
 
-          <div className="flex justify-between text-sm mt-2">
-              <p className="">Do not have an account? Sign Up </p>
-              <button className=""> Forget Password</button>
-          </div>
-        </div>
-      </div>
+          <p className="have-no-account">
+            Do not have an account?
+            <Link className="sign-up" to="/sign-up">
+              Sign Up
+            </Link>
+          </p>
+        </form>
+      </section>
     </main>
   );
 };

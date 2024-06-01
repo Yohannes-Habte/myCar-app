@@ -1,0 +1,12 @@
+
+.cart-product-container {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 1.5rem;
+}
+
+.car-image {
+    height: 20rem;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}

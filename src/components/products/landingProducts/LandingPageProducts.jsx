@@ -1,23 +1,25 @@
-import { useEffect } from "react";
-import "./AllProducts.css";
-import SmallProductCart from "../smallProductCart/SmallProductCart";
+import "./LandingPageProducts.css";
 import GlobalFunction from "../../../utils/GlobalFunction";
+import { useEffect } from "react";
+import SmallProductCart from "../smallProductCart/SmallProductCart";
+import PageLoader from "../../loader/PageLoader";
 
-const AllProducts = () => {
+const LandingPageProducts = () => {
   const { loading, data, getProducts } = GlobalFunction();
 
   // Display data on browser
   useEffect(() => {
-    getProducts("cars", 9, 0);
+    getProducts("cars", 6, 0);
 
     return () => {};
   }, []);
-
   return (
     <section>
-      <h3>List of Products</h3>
+      <h3>Cars of this Week </h3>
       {loading ? (
-        "Loading..."
+        <div className="small-product-cart-page-loader">
+          <PageLoader />
+        </div>
       ) : (
         <div className="small-product-cart-wrapper">
           {data &&
@@ -29,4 +31,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default LandingPageProducts;
