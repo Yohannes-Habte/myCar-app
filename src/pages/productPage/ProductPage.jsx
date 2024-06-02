@@ -7,8 +7,8 @@ const ProductPage = () => {
   return (
     <main>
       <Header />
-      <section className="h-lvh px-20">
-        <h1> Non Featured Single Product Details </h1>
+      <section className="px-20">
+        <h1> Product Details </h1>
 
         <ProductDetails />
       </section>

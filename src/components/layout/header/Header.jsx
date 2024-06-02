@@ -1,8 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import { FaShoppingCart } from "react-icons/fa";
+import { useContext } from "react";
+import { CartContext } from "../../../context/cart/CartProvider";
 
 const Header = () => {
+  const { cartItems } = useContext(CartContext);
+
+  console.log("Logged in user =", cartItems);
+
   return (
     <header className="flex justify-between px-10 py-3 bg-neutral-900 text-white">
       <div>logo</div>
@@ -24,11 +30,17 @@ const Header = () => {
           <li className="cart-item">
             <NavLink to={"/cart"}>
               <FaShoppingCart />
-              <span className="ordered-items">0</span>
+              <span className="ordered-items text-red-400 font-bold">
+                {cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}
+              </span>
             </NavLink>
           </li>
           <li>
-            <Link to={"/login"}> Log In </Link>{" "}
+            {cartItems && cartItems ? (
+              <Link to={"/login"}> Log In </Link>
+            ) : (
+              <span> {cartItems.fields.firstName} </span>
+            )}
           </li>
         </ul>
       </nav>

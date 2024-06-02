@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import "./SignUpPage.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/user/UserProvider";
+import { USER_ACTION } from "../../context/user/UserReducer";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
+  const { dispatch } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -24,7 +29,7 @@ const SignUpPage = () => {
 
     const spaceId = import.meta.env.VITE_SPACE_ID;
     const accessToken = import.meta.env.VITE_MGT_ACCESS_TOKEN;
-    const environmentId = "master"; 
+    const environmentId = "master";
 
     const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
 
@@ -49,7 +54,8 @@ const SignUpPage = () => {
     };
 
     try {
-      const response = await axios.post(url, entryData, {
+      dispatch({ type: USER_ACTION.SIGN_UP_START });
+      const { data } = await axios.post(url, entryData, {
         headers: {
           "Content-Type": "application/vnd.contentful.management.v1+json",
           Authorization: `Bearer ${accessToken}`,
@@ -57,9 +63,16 @@ const SignUpPage = () => {
         },
       });
 
-      console.log("Entry created successfully:", response.data);
+      dispatch({
+        type: USER_ACTION.SIGN_UP_SUCCESS,
+        payload: data,
+      });
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      console.error("Error creating entry:", error);
+      dispatch({
+        type: USER_ACTION.SIGN_UP_FAIL,
+        payload: toast.error(error.response.data.message),
+      });
     }
   };
 
