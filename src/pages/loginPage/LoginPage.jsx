@@ -27,7 +27,6 @@ const LoginPage = () => {
 
       localStorage.setItem("userInfo", JSON.stringify({ email, password }));
     } catch (err) {
-      setError("Invalid credentials");
       dispatch({
         type: USER_ACTION.LOGIN_FAIL,
         payload: toast.error(err.message),

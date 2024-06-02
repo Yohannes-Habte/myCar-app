@@ -1,0 +1,9 @@
+.home-page-container {
+  min-height: 100vh;
+}
+
+.home-page-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

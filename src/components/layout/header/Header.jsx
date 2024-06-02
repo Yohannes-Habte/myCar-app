@@ -3,11 +3,11 @@ import "./Header.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { useContext } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
+import { UserContext } from "../../../context/user/UserProvider";
 
 const Header = () => {
   const { cartItems } = useContext(CartContext);
-
-  console.log("Logged in user =", cartItems);
+  const { user } = useContext(UserContext);
 
   return (
     <header className="flex justify-between px-10 py-3 bg-neutral-900 text-white">
@@ -37,9 +37,9 @@ const Header = () => {
           </li>
           <li>
             {cartItems && cartItems ? (
-              <Link to={"/login"}> Log In </Link>
+              <span> {user.email} </span>
             ) : (
-              <span> {cartItems.fields.firstName} </span>
+              <Link to={"/login"}> Log In </Link>
             )}
           </li>
         </ul>
