@@ -1,8 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import PageLoader from "../loader/PageLoader";
 
-const ProductCarousel = ({ data, loading }) => {
+const ProductCarousel = ({ data }) => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -26,24 +25,21 @@ const ProductCarousel = ({ data, loading }) => {
   return (
     <section>
       <h3 className="carousel-title"> This week discount of 25%! </h3>
-      {loading ? (
-        <PageLoader />
-      ) : (
-        <Carousel
-          showDots={true}
-          responsive={responsive}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={4000}
-          keyBoardControl={true}
-          customTransition="all 500ms ease"
-          transitionDuration={1000}
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-40-px"
-        >
-          {data}
-        </Carousel>
-      )}
+
+      <Carousel
+        showDots={true}
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={4000}
+        keyBoardControl={true}
+        customTransition="all 500ms ease"
+        transitionDuration={1000}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+      >
+        {data}
+      </Carousel>
     </section>
   );
 };
