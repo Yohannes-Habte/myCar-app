@@ -25,7 +25,7 @@ const ProductCarousel = ({ data, loading }) => {
 
   return (
     <section>
-      <h3 className="carousel-title"> This week discount of 25%! </h3>
+      {/* <h3 className="carousel-title"> This week discount of 25%! </h3> */}
       {loading ? (
         <PageLoader />
       ) : (

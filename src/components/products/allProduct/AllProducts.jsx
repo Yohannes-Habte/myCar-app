@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./AllProducts.css";
 import SmallProductCart from "../smallProductCart/SmallProductCart";
 import GlobalFunction from "../../../utils/GlobalFunction";
+import PageLoader from "../../loader/PageLoader";
 
 const AllProducts = () => {
   const { loading, data, getProducts } = GlobalFunction();
@@ -15,9 +16,11 @@ const AllProducts = () => {
 
   return (
     <section>
-      <h3>List of Products</h3>
+      {/* <h3>List of Products</h3> */}
       {loading ? (
-        "Loading..."
+        <div className="small-product-cart-page-loader">
+          <PageLoader />
+        </div>
       ) : (
         <div className="small-product-cart-wrapper">
           {data &&

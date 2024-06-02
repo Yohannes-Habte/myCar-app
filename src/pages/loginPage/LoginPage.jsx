@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { loginToContentful } from "../../utils/clientLogin";
-
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +23,9 @@ const LoginPage = () => {
 
   return (
     <main>
-       <section className="h-lvh px-20">
+      <Header />
+
+      <section className="h-lvh px-20">
         <h1> Welcome to Your Account </h1>
 
         <form onSubmit={handleSubmit}>
@@ -55,6 +58,7 @@ const LoginPage = () => {
           </p>
         </form>
       </section>
+      <Footer />
     </main>
   );
 };
