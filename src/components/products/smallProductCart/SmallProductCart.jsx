@@ -3,31 +3,28 @@ import "./SmallProductCart.css";
 import { useContext } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
+import { toast } from "react-toastify";
 
 const SmallProductCart = ({ car }) => {
+  const { cartItems, dispatch } = useContext(CartContext);
 
-  const {cartItems, dispatch} = useContext(CartContext)
-
-  // Add to cart function from the home page
-  const addToCartHandler = async (item) => {
-   
-    const existingItem = cartItems.find((item) => item._id === product._id);
+  // Add to cart
+  const addToCartHandler = async (id) => {
+    const existingItem = cartItems.find((item) => item.sys.id === id);
 
     const quantity = existingItem ? existingItem.quantity + 1 : 1;
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/products/${item._id}`
-    );
-   
+    if (existingItem) {
+      toast.warning("Item exist in the cart!");
+    } else {
       dispatch({
         type: CART_ACTION.ADD_ITEM_TO_CART,
-        payload: { ...product, quantity },
+        payload: { ...car, quantity },
       });
-    
 
-    //navigate('/cart');
+      toast.success("Item added to cart successfully!");
+    }
   };
-
 
   const {
     fields: {
@@ -48,7 +45,7 @@ const SmallProductCart = ({ car }) => {
 
   const carDescription = description.content[0].content[0].value;
   const shortDescription = carDescription.slice(0, 139);
-  const shortText = shortDescription.concat("...")
+  const shortText = shortDescription.concat("...");
 
   return (
     <section className="cart-product-container">
@@ -65,9 +62,12 @@ const SmallProductCart = ({ car }) => {
         <p> Year: {year.slice(0, 4)} </p>
         <p> Performance: {performance} </p>
         <p> Transmission: {transmission} </p>
-        <p> {shortText} <strong className="text-red-700">read more</strong> </p>
+        <p>
+          {" "}
+          {shortText} <strong className="text-red-700">read more</strong>{" "}
+        </p>
       </Link>
-      <button>Add To Cart</button>
+      <button onClick={() => addToCartHandler(id)}>Add To Cart</button>
     </section>
   );
 };

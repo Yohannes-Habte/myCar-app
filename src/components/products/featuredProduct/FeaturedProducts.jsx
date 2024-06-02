@@ -1,8 +1,11 @@
 import "./FeaturedProducts.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { clientProducts } from "../../../utils/clientProducts";
 import { useParams } from "react-router-dom";
 import PageLoader from "../../loader/PageLoader";
+import { CartContext } from "../../../context/cart/CartProvider";
+import { toast } from "react-toastify";
+import { CART_ACTION } from "../../../context/cart/CartReducer";
 
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
@@ -30,10 +33,30 @@ const FeaturedProductsDetails = () => {
     return () => {};
   }, []);
 
+  const { cartItems, dispatch } = useContext(CartContext);
+
+  // Add to cart
+  const addToCartHandler = async (id) => {
+    const existingItem = cartItems.find((item) => item.sys.id === id);
+
+    const quantity = existingItem ? existingItem.quantity + 1 : 1;
+
+    if (existingItem) {
+      toast.warning("Item exist in the cart!");
+    } else {
+      dispatch({
+        type: CART_ACTION.ADD_ITEM_TO_CART,
+        payload: { ...featuredCarInfo, quantity },
+      });
+
+      toast.success("Item added to cart successfully!");
+    }
+  };
+
   return loading ? (
     <PageLoader />
   ) : (
-    <section className="h-lvh px-20">
+    <section className="px-20">
       <h1> Featured Car Details </h1>
       <figure>
         <img
@@ -43,6 +66,7 @@ const FeaturedProductsDetails = () => {
         />
       </figure>
       <h3> {featuredCarInfo?.fields?.brand} </h3>
+      <button onClick={() => addToCartHandler(id)}>Add To Cart</button>
 
       <section>
         <p> Model: {featuredCarInfo?.fields?.model} </p>
@@ -54,6 +78,12 @@ const FeaturedProductsDetails = () => {
         <p> Price: ${featuredCarInfo?.fields?.price} </p>
         <p> Transmission: {featuredCarInfo?.fields?.transmission} </p>
         <p> Year: {featuredCarInfo?.fields?.year} </p>
+        <p>
+          {" "}
+          {
+            featuredCarInfo?.fields?.description?.content[0]?.content[0]?.value
+          }{" "}
+        </p>
       </section>
       <p>Product Information </p>
     </section>
