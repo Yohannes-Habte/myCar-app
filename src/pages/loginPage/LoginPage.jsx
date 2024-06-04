@@ -2,9 +2,12 @@ import { useContext, useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { loginToContentful } from "../../utils/clientLogin";
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
+
 
 const LoginPage = () => {
   const { dispatch } = useContext(UserContext);
@@ -36,6 +39,10 @@ const LoginPage = () => {
 
   return (
     <main>
+
+      <Header />
+
+
       <section className="h-lvh px-20">
         <h1> Welcome to Your Account </h1>
 
@@ -69,6 +76,7 @@ const LoginPage = () => {
           </p>
         </form>
       </section>
+      <Footer />
     </main>
   );
 };
