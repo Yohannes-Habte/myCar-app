@@ -2,9 +2,12 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import "./SignUpPage.css";
 import { Link } from "react-router-dom";
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
+
 
 const SignUpPage = () => {
   const { dispatch } = useContext(UserContext);
@@ -78,6 +81,7 @@ const SignUpPage = () => {
 
   return (
     <main>
+      <Header />
       <section className="h-lvh px-20">
         <h1> Create Account for Free </h1>
 
@@ -142,6 +146,7 @@ const SignUpPage = () => {
           </p>
         </form>
       </section>
+      <Footer />
     </main>
   );
 };

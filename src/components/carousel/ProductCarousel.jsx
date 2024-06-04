@@ -24,6 +24,7 @@ const ProductCarousel = ({ data }) => {
 
   return (
     <section>
+
       <h3 className="carousel-title"> This week discount of 25%! </h3>
 
       <Carousel
@@ -40,6 +41,7 @@ const ProductCarousel = ({ data }) => {
       >
         {data}
       </Carousel>
+
     </section>
   );
 };

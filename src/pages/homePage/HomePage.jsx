@@ -1,18 +1,19 @@
 import { useEffect } from "react";
+import "./HomePage.css";
 import ProductCarousel from "../../components/carousel/ProductCarousel";
 import Footer from "../../components/layout/footer/Footer";
 import Header from "../../components/layout/header/Header";
 import LandingPageProducts from "../../components/products/landingProducts/LandingPageProducts";
 import GlobalFunction from "../../utils/GlobalFunction";
-import "./HomePage.css";
 import BigProductCart from "../../components/products/bigProductCart/BigProductCart";
+import FilterForm from "../../components/filterForm/FilterForm";
 import PageLoader from "../../components/loader/PageLoader";
 
 const HomePage = () => {
   const { loading, data, getProducts } = GlobalFunction();
 
   useEffect(() => {
-    getProducts("cars", 10, 0);
+    getProducts("cars", 6, 0);
 
     return () => {};
   }, []);
@@ -24,8 +25,11 @@ const HomePage = () => {
   return (
     <main className="home-page">
       <Header />
-      <section className="home-page-container px-20">
-        <h1> Welcome to myCar</h1>
+
+      <section className="container mx-auto">
+        <h1 className="headline-text"> We sell your dream car !</h1>
+
+        <FilterForm />
 
         {loading ? (
           <div className="home-page-loader">
