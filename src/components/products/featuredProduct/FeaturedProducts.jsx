@@ -3,9 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { clientProducts } from "../../../utils/clientProducts";
 import { useParams } from "react-router-dom";
 import PageLoader from "../../loader/PageLoader";
+import { FaCartPlus } from "react-icons/fa";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { toast } from "react-toastify";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
+
 
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
@@ -56,8 +58,12 @@ const FeaturedProductsDetails = () => {
   return loading ? (
     <PageLoader />
   ) : (
-    <section className="px-20">
+
+    <section className="mb-10 fituredCar-details-container">
+
+    
       <h1> Featured Car Details </h1>
+
       <figure>
         <img
           className="single-page-car-image"
@@ -65,27 +71,77 @@ const FeaturedProductsDetails = () => {
           alt={featuredCarInfo?.fields?.brand}
         />
       </figure>
-      <h3> {featuredCarInfo?.fields?.brand} </h3>
-      <button onClick={() => addToCartHandler(id)}>Add To Cart</button>
 
-      <section>
-        <p> Model: {featuredCarInfo?.fields?.model} </p>
-        <p> Brand: {featuredCarInfo?.fields?.brand} </p>
-        <p> Category: {featuredCarInfo?.fields?.catagory} </p>
-        <p> color: {featuredCarInfo?.fields?.colour} </p>
-        <p> Status: {featuredCarInfo?.fields?.newCar} </p>
-        <p> Performance: {featuredCarInfo?.fields?.performance} </p>
-        <p> Price: ${featuredCarInfo?.fields?.price} </p>
-        <p> Transmission: {featuredCarInfo?.fields?.transmission} </p>
-        <p> Year: {featuredCarInfo?.fields?.year} </p>
-        <p>
-          {" "}
-          {
-            featuredCarInfo?.fields?.description?.content[0]?.content[0]?.value
-          }{" "}
+      <div className="header-container flex items-center justify-between mt-6 bg-orange-200 px-1 py-2 rounded">
+        <div>
+          <h3 className="header-singleproduct-detail">
+            {" "}
+            {featuredCarInfo?.fields?.brand}{" "}
+          </h3>
+        </div>
+        <div className="flex gap-2">
+          <div>
+            <p className="bg-gray-200 py-2 px-2 rounded font-bold">
+              {" "}
+              Price: ${featuredCarInfo?.fields?.price}{" "}
+            </p>
+          </div>
+          <div className="card-icon flex  items-center gap-1 rounded">
+            <button className="text-sm"> Add To Cart </button>
+            <FaCartPlus />
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 className="font-semibold mt-6 px-2">Description</h3>
+        <p className="my-2 px-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem unde
+          nisi recusandae temporibus fuga quae cum possimus nulla aliquam,
+          cumque molestiae id libero! Debitis dicta repudiandae quasi quisquam
+          odit sed?
         </p>
+      </div>
+      <h3 className="font-semibold mt-6 px-2">Specificattion:</h3>
+
+      <section className="bg-orange-100 px-1 py-2 rounded grid gap-2 grid-cols-2 mb-60">
+        <div>
+          <p className="bg-gray-200 py-2 px-1">
+            {" "}
+            Model: {featuredCarInfo?.fields?.model}{" "}
+          </p>
+          <p className="bg-gray-300 py-2 px-1">
+            {" "}
+            Brand: {featuredCarInfo?.fields?.brand}{" "}
+          </p>
+          <p className="bg-gray-200 py-2 px-1">
+            {" "}
+            Category: {featuredCarInfo?.fields?.catagory}{" "}
+          </p>
+          <p className="bg-gray-300 py-2 px-1">
+            {" "}
+            color: {featuredCarInfo?.fields?.colour}{" "}
+          </p>
+        </div>
+        <div>
+          <p className="bg-gray-200 py-2 px-1">
+            {" "}
+            Status: {featuredCarInfo?.fields?.newCar}{" "}
+          </p>
+          <p className="bg-gray-300 py-2 px-1">
+            {" "}
+            Performance: {featuredCarInfo?.fields?.performance}{" "}
+          </p>
+          <p className="bg-gray-200 py-2 px-1">
+            {" "}
+            Transmission: {featuredCarInfo?.fields?.transmission}{" "}
+          </p>
+          <p className="bg-gray-300 py-2 px-1">
+            {" "}
+            Year: {featuredCarInfo?.fields?.year}{" "}
+          </p>
+        </div>
+
       </section>
-      <p>Product Information </p>
     </section>
   );
 };

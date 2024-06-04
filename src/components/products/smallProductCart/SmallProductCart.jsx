@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
+import { FaCartPlus } from "react-icons/fa";
 
 const SmallProductCart = ({ car }) => {
   const { cartItems, dispatch } = useContext(CartContext);
@@ -48,27 +49,37 @@ const SmallProductCart = ({ car }) => {
   const shortText = shortDescription.concat("...");
 
   return (
+    <>
     <section className="cart-product-container">
       <Link to={`/products/${id}`}>
         <figure>
-          <img className="car-image" src={image.fields.file.url} alt={brand} />
+          <img
+            className="car-image"
+            src={image.fields.file.url}
+            alt={brand}
+          />
         </figure>
-        <h3> {brand} </h3>
-        <p> Category {catagory} </p>
-        <p> Color: {colour} </p>
-        <p> Model: {model} </p>
-        <p> Price: ${price} </p>
-        <p> Status: {newCar} </p>
+        <h3 className="header-smallCard"> {brand} </h3>
+        <p className="sub-title-text"> {model} </p>
         <p> Year: {year.slice(0, 4)} </p>
-        <p> Performance: {performance} </p>
-        <p> Transmission: {transmission} </p>
+        {/* <p> Color: {colour} </p> */}
+        {/* <p> Category {catagory} </p> */}
         <p>
           {" "}
-          {shortText} <strong className="text-red-700">read more</strong>{" "}
+          {shortText} <span className="text-red-500">read more</span>{" "}
         </p>
       </Link>
-      <button onClick={() => addToCartHandler(id)}>Add To Cart</button>
+      <div className="flex justify-between mt-6">
+        <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
+        <Link>
+          <div className="card-icon">
+            <FaCartPlus onClick={() => addToCartHandler(id)} />
+          </div>
+        </Link>
+      </div>
+      {/* <button>Add To Cart</button> */}
     </section>
+  </>
   );
 };
 

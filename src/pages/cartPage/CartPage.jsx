@@ -1,3 +1,7 @@
+
+import "./CartPage.css";
+import Footer from "../../components/layout/footer/Footer";
+import Header from "../../components/layout/header/Header";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/cart/CartProvider";
 import "./CartPage.css";
@@ -25,8 +29,13 @@ const CartPage = () => {
   };
 
   return (
+
     <main className="cart-page">
-      <section className="px-20">
+      <Header />
+
+    
+    
+      <section className=" h-lvh px-20">
         <h1 className="cart-title"> Shopping Cart </h1>
 
         {cartItems.length === 0 ? (
@@ -115,7 +124,9 @@ const CartPage = () => {
             </div>
           </section>
         )}
+
       </section>
+      <Footer />
     </main>
   );
 };

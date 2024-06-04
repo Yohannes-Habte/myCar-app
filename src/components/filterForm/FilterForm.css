@@ -1,0 +1,40 @@
+.filter-container {
+  width: 80vw;
+  max-width: 800px;
+  min-width: 380px;
+  margin: auto;
+  background-color: var(--grayMedium);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.car-condition {
+  background-color: var(--bgLightest);
+  padding: 0.3rem 1rem;
+  color: var(--textDark);
+  border-radius: 0.4rem;
+}
+
+.offers {
+  background-color: var(--brandColor);
+  border-radius: 0.4rem;
+  color: var(--textDark);
+  text-align: center;
+  padding: 0.4rem 0;
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 1000px) {
+  .filter-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .filter-container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -7,8 +7,10 @@ const FeaturedProductPage = () => {
   return (
     <main>
       <Header />
-      <section>
-        <h1>Featured Car Detail Information </h1>
+      <section className="feturedCar-details-container">
+        <h1 className="featured-card-title">
+          Featured Car Detail Information{" "}
+        </h1>
 
         <FeaturedProductsDetails />
       </section>
