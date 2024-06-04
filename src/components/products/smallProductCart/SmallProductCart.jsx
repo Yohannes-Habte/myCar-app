@@ -4,9 +4,11 @@ import { FaCartPlus } from "react-icons/fa";
 import { useContext } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
+import { toast } from "react-toastify";
 
 const SmallProductCart = ({ car }) => {
   const { cartItems, dispatch } = useContext(CartContext);
+
 
   // Add to cart function from the home page
   const addToCartHandler = async (item) => {
@@ -23,7 +25,23 @@ const SmallProductCart = ({ car }) => {
       payload: { ...product, quantity },
     });
 
-    //navigate('/cart');
+  // Add to cart
+  const addToCartHandler = async (id) => {
+    const existingItem = cartItems.find((item) => item.sys.id === id);
+
+    const quantity = existingItem ? existingItem.quantity + 1 : 1;
+
+    if (existingItem) {
+      toast.warning("Item exist in the cart!");
+    } else {
+      dispatch({
+        type: CART_ACTION.ADD_ITEM_TO_CART,
+        payload: { ...car, quantity },
+      });
+
+
+      toast.success("Item added to cart successfully!");
+    }
   };
 
   const {
@@ -48,6 +66,7 @@ const SmallProductCart = ({ car }) => {
   const shortText = shortDescription.concat("...");
 
   return (
+
     <>
       <section className="cart-product-container">
         <Link to={`/products/${id}`}>
@@ -72,13 +91,14 @@ const SmallProductCart = ({ car }) => {
           <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
           <Link>
             <div className="card-icon">
-              <FaCartPlus />
+              <FaCartPlus onClick={() => addToCartHandler(id)} />
             </div>
           </Link>
         </div>
         {/* <button>Add To Cart</button> */}
       </section>
     </>
+
   );
 };
 

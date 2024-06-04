@@ -1,9 +1,13 @@
 import "./FeaturedProducts.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { clientProducts } from "../../../utils/clientProducts";
 import { useParams } from "react-router-dom";
 import PageLoader from "../../loader/PageLoader";
 import { FaCartPlus } from "react-icons/fa";
+import { CartContext } from "../../../context/cart/CartProvider";
+import { toast } from "react-toastify";
+import { CART_ACTION } from "../../../context/cart/CartReducer";
+
 
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
@@ -31,10 +35,35 @@ const FeaturedProductsDetails = () => {
     return () => {};
   }, []);
 
+  const { cartItems, dispatch } = useContext(CartContext);
+
+  // Add to cart
+  const addToCartHandler = async (id) => {
+    const existingItem = cartItems.find((item) => item.sys.id === id);
+
+    const quantity = existingItem ? existingItem.quantity + 1 : 1;
+
+    if (existingItem) {
+      toast.warning("Item exist in the cart!");
+    } else {
+      dispatch({
+        type: CART_ACTION.ADD_ITEM_TO_CART,
+        payload: { ...featuredCarInfo, quantity },
+      });
+
+      toast.success("Item added to cart successfully!");
+    }
+  };
+
   return loading ? (
     <PageLoader />
   ) : (
+
     <section className="mb-10 fituredCar-details-container">
+
+    
+      <h1> Featured Car Details </h1>
+
       <figure>
         <img
           className="single-page-car-image"
@@ -42,6 +71,7 @@ const FeaturedProductsDetails = () => {
           alt={featuredCarInfo?.fields?.brand}
         />
       </figure>
+
       <div className="header-container flex items-center justify-between mt-6 bg-orange-200 px-1 py-2 rounded">
         <div>
           <h3 className="header-singleproduct-detail">
@@ -110,6 +140,7 @@ const FeaturedProductsDetails = () => {
             Year: {featuredCarInfo?.fields?.year}{" "}
           </p>
         </div>
+
       </section>
     </section>
   );

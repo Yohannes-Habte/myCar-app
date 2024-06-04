@@ -2,10 +2,9 @@ import "./LandingPageProducts.css";
 import GlobalFunction from "../../../utils/GlobalFunction";
 import { useEffect } from "react";
 import SmallProductCart from "../smallProductCart/SmallProductCart";
-import PageLoader from "../../loader/PageLoader";
 
 const LandingPageProducts = () => {
-  const { loading, data, getProducts } = GlobalFunction();
+  const { data, getProducts } = GlobalFunction();
 
   // Display data on browser
   useEffect(() => {
@@ -14,6 +13,7 @@ const LandingPageProducts = () => {
     return () => {};
   }, []);
   return (
+
     <>
       <section>
         <div className="flex justify-between mb-3 mt-36">
@@ -54,6 +54,8 @@ const LandingPageProducts = () => {
         )}
       </section>
     </>
+
+   
   );
 };
 

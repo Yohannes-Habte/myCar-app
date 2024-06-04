@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./ProductDetails.css";
 import { useParams } from "react-router-dom";
 import { clientProducts } from "../../../utils/clientProducts";
 import PageLoader from "../../loader/PageLoader";
 import { FaCartPlus } from "react-icons/fa";
+import { CartContext } from "../../../context/cart/CartProvider";
+import { CART_ACTION } from "../../../context/cart/CartReducer";
+import { toast } from "react-toastify";
+
 
 const ProductDetails = () => {
   const { id } = useParams();
 
   const [carInfo, setCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  console.log("Car description=", carInfo);
 
   const singleCarDetails = async () => {
     try {
@@ -32,7 +37,27 @@ const ProductDetails = () => {
     return () => {};
   }, []);
 
-  // try mb
+
+  const { cartItems, dispatch } = useContext(CartContext);
+
+  // Add to cart
+  const addToCartHandler = async (id) => {
+    const existingItem = cartItems.find((item) => item.sys.id === id);
+
+    const quantity = existingItem ? existingItem.quantity + 1 : 1;
+
+    if (existingItem) {
+      toast.warning("Item exist in the cart!");
+    } else {
+      dispatch({
+        type: CART_ACTION.ADD_ITEM_TO_CART,
+        payload: { ...carInfo, quantity },
+      });
+
+      toast.success("Item added to cart successfully!");
+    }
+  };
+
 
   return loading ? (
     <div>
@@ -115,6 +140,7 @@ const ProductDetails = () => {
             Year: {carInfo?.fields?.year}{" "}
           </p>
         </div>
+
       </section>
     </section>
   );

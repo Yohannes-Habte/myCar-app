@@ -7,9 +7,11 @@ import PageLoader from "../../loader/PageLoader";
 const AllProducts = () => {
   const { loading, data, getProducts } = GlobalFunction();
 
+  console.log("data", data)
+
   // Display data on browser
   useEffect(() => {
-    getProducts("cars", 9, 0);
+    getProducts("cars", 12, 0);
 
     return () => {};
   }, []);

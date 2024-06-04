@@ -1,8 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
+import { useContext } from "react";
+import { CartContext } from "../../../context/cart/CartProvider";
+import { UserContext } from "../../../context/user/UserProvider";
 import { FaShoppingCart, FaCar, FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
+  
+    const { cartItems } = useContext(CartContext);
+  const { user } = useContext(UserContext);
+  
+  
   const navLinkStyles = ({ isActive }) => {
     return isActive ? "font-bold text-orange-400" : "text-white";
   };
@@ -52,12 +60,21 @@ const Header = () => {
                 <div className="cart-container">
                   <FaShoppingCart />
                 </div>
-                <div className="cart-items">0</div>
+                <div className="cart-items">  {cartItems.reduce((acc, curr) => acc + curr.quantity, 0)} </div>
               </NavLink>
             </li>
+
+ <li>
+            {cartItems && cartItems ? (
+              <span> {user.email} </span>
+            ) : (
+              <Link to={"/login"}> Log In </Link>
+            )}
+          </li>
           </ul>
         </nav>
       </div>
+
     </header>
   );
 };

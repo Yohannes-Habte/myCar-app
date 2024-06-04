@@ -7,6 +7,8 @@ import LandingPageProducts from "../../components/products/landingProducts/Landi
 import GlobalFunction from "../../utils/GlobalFunction";
 import BigProductCart from "../../components/products/bigProductCart/BigProductCart";
 import FilterForm from "../../components/filterForm/FilterForm";
+import PageLoader from "../../components/loader/PageLoader";
+
 
 const HomePage = () => {
   const { loading, data, getProducts } = GlobalFunction();
@@ -22,14 +24,31 @@ const HomePage = () => {
   ));
 
   return (
-    <main>
+    <main className="home-page">
       <Header />
+
       <section className="container mx-auto">
         <h1 className="headline-text"> We sell your dream car !</h1>
 
-        <ProductCarousel data={cardsData} loading={loading} />
+    
         <FilterForm />
-        <LandingPageProducts />
+      
+
+      <section className="home-page-container px-20">
+        <h1> Welcome to myCar</h1>
+
+        {loading ? (
+          <div className="home-page-loader">
+            <PageLoader />
+          </div>
+        ) : (
+          <>
+            <ProductCarousel data={cardsData} loading={loading} />
+
+            <LandingPageProducts />
+          </>
+        )}
+
       </section>
 
       <Footer />

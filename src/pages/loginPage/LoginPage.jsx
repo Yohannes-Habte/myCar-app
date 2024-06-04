@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { loginToContentful } from "../../utils/clientLogin";
 import Header from "../../components/layout/header/Header";
 import Footer from "../../components/layout/footer/Footer";
+import { UserContext } from "../../context/user/UserProvider";
+import { USER_ACTION } from "../../context/user/UserReducer";
+import { toast } from "react-toastify";
+
 
 const LoginPage = () => {
+  const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -14,16 +19,29 @@ const LoginPage = () => {
     e.preventDefault();
     setError(null);
     try {
+      dispatch({ type: USER_ACTION.LOGIN_START });
+      
       await loginToContentful(email, password);
-      // Handle successful login
+
+      dispatch({
+        type: USER_ACTION.LOGIN_SUCCESS,
+        payload: { email, password },
+      });
+
+      localStorage.setItem("userInfo", JSON.stringify({ email, password }));
     } catch (err) {
-      setError("Invalid credentials");
+      dispatch({
+        type: USER_ACTION.LOGIN_FAIL,
+        payload: toast.error(err.message),
+      });
     }
   };
 
   return (
     <main>
+
       <Header />
+
 
       <section className="h-lvh px-20">
         <h1> Welcome to Your Account </h1>
