@@ -80,7 +80,7 @@ const BigProductCart = ({ data }) => {
                 <p>${price}</p>
               </div>
               <div className="card-icon">
-                <FaCartPlus onClick={() => addToCartHandler(id) />
+                <FaCartPlus onClick={() => addToCartHandler(id)} />
               </div>
             </div>
           </div>

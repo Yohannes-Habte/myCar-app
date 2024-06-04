@@ -1,29 +1,13 @@
 import { Link } from "react-router-dom";
 import "./SmallProductCart.css";
-import { FaCartPlus } from "react-icons/fa";
 import { useContext } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
+import { FaCartPlus } from "react-icons/fa";
 
 const SmallProductCart = ({ car }) => {
   const { cartItems, dispatch } = useContext(CartContext);
-
-
-  // Add to cart function from the home page
-  const addToCartHandler = async (item) => {
-    const existingItem = cartItems.find((item) => item._id === product._id);
-
-    const quantity = existingItem ? existingItem.quantity + 1 : 1;
-
-    const { data } = await axios.get(
-      `http://localhost:5000/api/products/${item._id}`
-    );
-
-    dispatch({
-      type: CART_ACTION.ADD_ITEM_TO_CART,
-      payload: { ...product, quantity },
-    });
 
   // Add to cart
   const addToCartHandler = async (id) => {
@@ -38,7 +22,6 @@ const SmallProductCart = ({ car }) => {
         type: CART_ACTION.ADD_ITEM_TO_CART,
         payload: { ...car, quantity },
       });
-
 
       toast.success("Item added to cart successfully!");
     }
@@ -66,39 +49,37 @@ const SmallProductCart = ({ car }) => {
   const shortText = shortDescription.concat("...");
 
   return (
-
     <>
-      <section className="cart-product-container">
-        <Link to={`/products/${id}`}>
-          <figure>
-            <img
-              className="car-image"
-              src={image.fields.file.url}
-              alt={brand}
-            />
-          </figure>
-          <h3 className="header-smallCard"> {brand} </h3>
-          <p className="sub-title-text"> {model} </p>
-          <p> Year: {year.slice(0, 4)} </p>
-          {/* <p> Color: {colour} </p> */}
-          {/* <p> Category {catagory} </p> */}
-          <p>
-            {" "}
-            {shortText} <span className="text-red-500">read more</span>{" "}
-          </p>
+    <section className="cart-product-container">
+      <Link to={`/products/${id}`}>
+        <figure>
+          <img
+            className="car-image"
+            src={image.fields.file.url}
+            alt={brand}
+          />
+        </figure>
+        <h3 className="header-smallCard"> {brand} </h3>
+        <p className="sub-title-text"> {model} </p>
+        <p> Year: {year.slice(0, 4)} </p>
+        {/* <p> Color: {colour} </p> */}
+        {/* <p> Category {catagory} </p> */}
+        <p>
+          {" "}
+          {shortText} <span className="text-red-500">read more</span>{" "}
+        </p>
+      </Link>
+      <div className="flex justify-between mt-6">
+        <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
+        <Link>
+          <div className="card-icon">
+            <FaCartPlus onClick={() => addToCartHandler(id)} />
+          </div>
         </Link>
-        <div className="flex justify-between mt-6">
-          <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
-          <Link>
-            <div className="card-icon">
-              <FaCartPlus onClick={() => addToCartHandler(id)} />
-            </div>
-          </Link>
-        </div>
-        {/* <button>Add To Cart</button> */}
-      </section>
-    </>
-
+      </div>
+      {/* <button>Add To Cart</button> */}
+    </section>
+  </>
   );
 };
 

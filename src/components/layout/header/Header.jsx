@@ -66,7 +66,7 @@ const Header = () => {
 
  <li>
             {cartItems && cartItems ? (
-              <span> {user.email} </span>
+              <span> {user?.email} </span>
             ) : (
               <Link to={"/login"}> Log In </Link>
             )}
