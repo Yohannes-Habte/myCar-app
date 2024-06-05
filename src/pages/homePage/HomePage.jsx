@@ -8,6 +8,7 @@ import GlobalFunction from "../../utils/GlobalFunction";
 import BigProductCart from "../../components/products/bigProductCart/BigProductCart";
 import FilterForm from "../../components/filterForm/FilterForm";
 import PageLoader from "../../components/loader/PageLoader";
+import Services from "../../components/services/Services";
 
 const HomePage = () => {
   const { loading, data, getProducts } = GlobalFunction();
@@ -43,6 +44,7 @@ const HomePage = () => {
           </>
         )}
       </section>
+      <Services />
 
       <Footer />
     </main>
