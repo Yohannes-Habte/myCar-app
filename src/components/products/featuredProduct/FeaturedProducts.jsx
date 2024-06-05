@@ -14,7 +14,10 @@ const FeaturedProductsDetails = () => {
   const [featuredCarInfo, setFeaturedCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // console.log("car info=", featuredCarInfo);
+
+  const status = featuredCarInfo?.fields?.newCar === true? "New Car" : "Used Car"
+
+  
 
   const featuredCarDetails = async () => {
     try {
@@ -81,18 +84,15 @@ const FeaturedProductsDetails = () => {
             </p>
           </div>
           <div className="card-icon flex  items-center gap-1 rounded">
-            <button className="text-sm"> Add To Cart </button>
-            <FaCartPlus />
+            <button onClick={() => addToCartHandler(id)} className="text-sm"> Add To Cart </button>
+            <FaCartPlus onClick={() => addToCartHandler(id)} />
           </div>
         </div>
       </div>
       <div>
         <h3 className="font-semibold mt-6 px-2">Description</h3>
         <p className="my-2 px-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem unde
-          nisi recusandae temporibus fuga quae cum possimus nulla aliquam,
-          cumque molestiae id libero! Debitis dicta repudiandae quasi quisquam
-          odit sed?
+          {featuredCarInfo?.fields?.description?.content[0]?.content[0]?.value}
         </p>
       </div>
       <h3 className="font-semibold mt-6 px-2">Specificattion:</h3>
@@ -119,7 +119,7 @@ const FeaturedProductsDetails = () => {
         <div>
           <p className="bg-orange-200 py-2 px-1">
             {" "}
-            Status: {featuredCarInfo?.fields?.newCar}{" "}
+            Status: {status}
           </p>
           <p className="bg-orange-300 py-2 px-1">
             {" "}

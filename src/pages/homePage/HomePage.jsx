@@ -3,12 +3,14 @@ import "./HomePage.css";
 import ProductCarousel from "../../components/carousel/ProductCarousel";
 import Footer from "../../components/layout/footer/Footer";
 import Header from "../../components/layout/header/Header";
-import LandingPageProducts from "../../components/products/landingProducts/LandingPageProducts";
 import GlobalFunction from "../../utils/GlobalFunction";
 import BigProductCart from "../../components/products/bigProductCart/BigProductCart";
 import FilterForm from "../../components/filterForm/FilterForm";
 import PageLoader from "../../components/loader/PageLoader";
+import UsedCars from "../../components/products/landingProducts/UsedCars";
+import NewCars from "../../components/products/landingProducts/NewCars";
 import Services from "../../components/services/Services";
+
 
 const HomePage = () => {
   const { loading, data, getProducts } = GlobalFunction();
@@ -40,7 +42,9 @@ const HomePage = () => {
           <>
             <ProductCarousel data={cardsData} loading={loading} />
 
-            <LandingPageProducts />
+            <NewCars />
+
+            <UsedCars />
           </>
         )}
       </section>
