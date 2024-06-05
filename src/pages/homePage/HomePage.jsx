@@ -9,6 +9,7 @@ import FilterForm from "../../components/filterForm/FilterForm";
 import PageLoader from "../../components/loader/PageLoader";
 import UsedCars from "../../components/products/landingProducts/UsedCars";
 import NewCars from "../../components/products/landingProducts/NewCars";
+import Services from "../../components/services/Services";
 
 
 const HomePage = () => {
@@ -47,6 +48,7 @@ const HomePage = () => {
           </>
         )}
       </section>
+      <Services />
 
       <Footer />
     </main>

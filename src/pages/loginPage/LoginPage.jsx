@@ -8,7 +8,6 @@ import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
 
-
 const LoginPage = () => {
   const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
@@ -20,7 +19,7 @@ const LoginPage = () => {
     setError(null);
     try {
       dispatch({ type: USER_ACTION.LOGIN_START });
-      
+
       await loginToContentful(email, password);
 
       dispatch({
@@ -39,42 +38,46 @@ const LoginPage = () => {
 
   return (
     <main>
-
       <Header />
 
+      <section>
+        <h1 className="header-text"> Welcome to Your Account </h1>
 
-      <section className="h-lvh px-20">
-        <h1> Welcome to Your Account </h1>
-
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} className="form-container-login">
+          <div className="flex flex-col gap-1">
             <label>Email</label>
             <input
               type="email"
               value={email}
+              placeholder="Your email"
               onChange={(e) => setEmail(e.target.value)}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label>Password</label>
             <input
               type="password"
               value={password}
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              className="border-2"
+              className="border-none mb-8 p-2 text-black rounded outline-none"
             />
           </div>
           {error && <p>{error}</p>}
-          <button type="submit">Login</button>
-
-          <p className="have-no-account">
-            Do not have an account?
-            <Link className="sign-up" to="/sign-up">
-              Sign Up
-            </Link>
-          </p>
+          <button
+            type="submit"
+            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+          >
+            Login
+          </button>
         </form>
+        <p className="have-no-account">
+          Do not have an account?
+          <Link className="sign-up" to="/sign-up">
+            Sign Up
+          </Link>
+        </p>
       </section>
       <Footer />
     </main>

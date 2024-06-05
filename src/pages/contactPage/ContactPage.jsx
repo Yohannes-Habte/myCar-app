@@ -60,46 +60,54 @@ const ContactPage = () => {
   return (
     <main>
       <Header />
-      <section className="h-lvh px-20">
-        <h1> Contact Us</h1>
+      <section className="mb-20">
+        <h1 className="header-text"> Contact Us</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} className="form-container">
+          <div className="flex flex-col gap-1">
             <label>Full Name</label>
             <input
               type="text"
               name="userName"
               value={formData.userName}
+              placeholder="Your full name"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-1">
             <label>Email Address </label>
             <input
               type="email"
               name="email"
               value={formData.email}
+              placeholder="Your email address"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="message">Text Message </label>
             <textarea
               name="message"
               id="message"
-              rows="8"
+              rows="6"
               cols="50"
               value={formData.message}
+              placeholder="Your message"
               onChange={handleChange}
-              className="border-2"
+              className="border-none mb-8 p-2 text-black rounded outline-none"
             ></textarea>
           </div>
 
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+          >
+            Send your message
+          </button>
         </form>
       </section>
 
@@ -109,4 +117,3 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
-

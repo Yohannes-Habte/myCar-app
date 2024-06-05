@@ -37,6 +37,7 @@ const SmallProductCart = ({ car }) => {
   const shortText = shortDescription.concat("...");
 
   return (
+
     <section className="cart-product-container">
       <Link to={`/products/${id}`}>
         <figure>
@@ -59,6 +60,7 @@ const SmallProductCart = ({ car }) => {
         </Link>
       </div>
     </section>
+
   );
 };
 
