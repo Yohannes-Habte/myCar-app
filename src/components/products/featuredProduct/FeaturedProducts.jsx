@@ -8,14 +8,13 @@ import { CartContext } from "../../../context/cart/CartProvider";
 import { toast } from "react-toastify";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 
-
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
 
   const [featuredCarInfo, setFeaturedCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  console.log("car info=", featuredCarInfo);
+  // console.log("car info=", featuredCarInfo);
 
   const featuredCarDetails = async () => {
     try {
@@ -58,12 +57,7 @@ const FeaturedProductsDetails = () => {
   return loading ? (
     <PageLoader />
   ) : (
-
     <section className="mb-10 fituredCar-details-container">
-
-    
-      <h1> Featured Car Details </h1>
-
       <figure>
         <img
           className="single-page-car-image"
@@ -81,7 +75,7 @@ const FeaturedProductsDetails = () => {
         </div>
         <div className="flex gap-2">
           <div>
-            <p className="bg-gray-200 py-2 px-2 rounded font-bold">
+            <p className="bg-orange-200 py-2 px-2 rounded font-bold">
               {" "}
               Price: ${featuredCarInfo?.fields?.price}{" "}
             </p>
@@ -103,44 +97,43 @@ const FeaturedProductsDetails = () => {
       </div>
       <h3 className="font-semibold mt-6 px-2">Specificattion:</h3>
 
-      <section className="bg-orange-100 px-1 py-2 rounded grid gap-2 grid-cols-2 mb-60">
+      <section className="bg-orange-200 px-1 py-2 rounded grid gap-2 grid-cols-2 mb-60">
         <div>
-          <p className="bg-gray-200 py-2 px-1">
+          <p className="bg-orange-200 py-2 px-1">
             {" "}
             Model: {featuredCarInfo?.fields?.model}{" "}
           </p>
-          <p className="bg-gray-300 py-2 px-1">
+          <p className="bg-orange-300 py-2 px-1">
             {" "}
             Brand: {featuredCarInfo?.fields?.brand}{" "}
           </p>
-          <p className="bg-gray-200 py-2 px-1">
+          <p className="bg-orange-200 py-2 px-1">
             {" "}
             Category: {featuredCarInfo?.fields?.catagory}{" "}
           </p>
-          <p className="bg-gray-300 py-2 px-1">
+          <p className="bg-orange-300 py-2 px-1">
             {" "}
             color: {featuredCarInfo?.fields?.colour}{" "}
           </p>
         </div>
         <div>
-          <p className="bg-gray-200 py-2 px-1">
+          <p className="bg-orange-200 py-2 px-1">
             {" "}
             Status: {featuredCarInfo?.fields?.newCar}{" "}
           </p>
-          <p className="bg-gray-300 py-2 px-1">
+          <p className="bg-orange-300 py-2 px-1">
             {" "}
             Performance: {featuredCarInfo?.fields?.performance}{" "}
           </p>
-          <p className="bg-gray-200 py-2 px-1">
+          <p className="bg-orange-200 py-2 px-1">
             {" "}
             Transmission: {featuredCarInfo?.fields?.transmission}{" "}
           </p>
-          <p className="bg-gray-300 py-2 px-1">
+          <p className="bg-orange-300 py-2 px-1">
             {" "}
             Year: {featuredCarInfo?.fields?.year}{" "}
           </p>
         </div>
-
       </section>
     </section>
   );

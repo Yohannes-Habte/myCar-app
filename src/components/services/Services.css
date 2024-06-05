@@ -1,0 +1,35 @@
+.service-container {
+  background-color: var(--grayMedium);
+  padding: 2rem;
+  color: var(--textLight);
+  margin-top: 6rem;
+}
+
+.service-head-text {
+  text-align: center;
+  font-family: "Poetsen One", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.rervice-para-text {
+  width: 70vw;
+  margin: auto;
+  max-width: 800px;
+  text-align: center;
+  padding-bottom: 0.8rem;
+}
+
+.services-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80vw;
+  max-width: 1000px;
+  margin: 1rem auto;
+  gap: 2rem;
+
+  li {
+    font-size: 0.9rem;
+  }
+}

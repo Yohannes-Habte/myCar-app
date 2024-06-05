@@ -8,7 +8,6 @@ import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
 
-
 const SignUpPage = () => {
   const { dispatch } = useContext(UserContext);
 
@@ -82,69 +81,68 @@ const SignUpPage = () => {
   return (
     <main>
       <Header />
-      <section className="h-lvh px-20">
-        <h1> Create Account for Free </h1>
+      <section className="login-page-container">
+        <h1 className="header-text"> Create Account for Free </h1>
 
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} className="form-container-signup">
+          <div className="flex flex-col gap-1">
             <label>First Name:</label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
+              placeholder="Your first name"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label>Last Name:</label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
+              placeholder="Your last name"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label>Email:</label>
             <input
               type="email"
               name="email"
               value={formData.email}
+              placeholder="Your email address"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label>Password:</label>
             <input
               type="password"
               name="password"
               value={formData.password}
+              placeholder="Create your password"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none mb-8"
             />
           </div>
-          <div>
-            <label>Phone:</label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="border-2"
-            />
-          </div>
-          <button type="submit">Sign Up</button>
 
-          <p className="have-account">
-            Already have an account?
-            <Link className="login-link" to="/login">
-              Log In
-            </Link>
-          </p>
+          <button
+            type="submit"
+            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+          >
+            Sign Up
+          </button>
         </form>
+        <p className="have-account">
+          Already have an account?
+          <Link className="login-link" to="/login">
+            Log In
+          </Link>
+        </p>
       </section>
       <Footer />
     </main>

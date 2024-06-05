@@ -50,36 +50,33 @@ const SmallProductCart = ({ car }) => {
 
   return (
     <>
-    <section className="cart-product-container">
-      <Link to={`/products/${id}`}>
-        <figure>
-          <img
-            className="car-image"
-            src={image.fields.file.url}
-            alt={brand}
-          />
-        </figure>
-        <h3 className="header-smallCard"> {brand} </h3>
-        <p className="sub-title-text"> {model} </p>
-        <p> Year: {year.slice(0, 4)} </p>
-        {/* <p> Color: {colour} </p> */}
-        {/* <p> Category {catagory} </p> */}
-        <p>
-          {" "}
-          {shortText} <span className="text-red-500">read more</span>{" "}
-        </p>
-      </Link>
-      <div className="flex justify-between mt-6">
-        <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
-        <Link>
-          <div className="card-icon">
-            <FaCartPlus onClick={() => addToCartHandler(id)} />
-          </div>
+      <section className="cart-product-container">
+        <Link to={`/products/${id}`}>
+          <figure>
+            <img
+              className="car-image"
+              src={image.fields.file.url}
+              alt={brand}
+            />
+          </figure>
+          <h3 className="header-smallCard"> {brand} </h3>
+          <p className="sub-title-text"> {model} </p>
+          <p> Year: {year.slice(0, 4)} </p>
+          <p>
+            {" "}
+            {shortText} <span className="text-red-500">read more</span>{" "}
+          </p>
         </Link>
-      </div>
-      {/* <button>Add To Cart</button> */}
-    </section>
-  </>
+        <div className="flex justify-between mt-6">
+          <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
+          <Link>
+            <div className="card-icon">
+              <FaCartPlus onClick={() => addToCartHandler(id)} />
+            </div>
+          </Link>
+        </div>
+      </section>
+    </>
   );
 };
 

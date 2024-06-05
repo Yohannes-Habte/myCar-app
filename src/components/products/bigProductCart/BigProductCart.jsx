@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 
-
 const BigProductCart = ({ data }) => {
   const {
     fields: { brand, catagory, description, model, newCar, price, image },
@@ -39,29 +38,6 @@ const BigProductCart = ({ data }) => {
 
   return (
     <>
-      {/* <section className="featured-car-wrapper">
-        <Link to={`products/featured/${id}`}>
-          <figure className="image-container">
-            <img
-              className="featured-car-image-for-landing-page"
-              src={image.fields.file.url}
-              alt={brand}
-            />
-          </figure>
-        </Link>
-
-        <aside className="car-info">
-          <Link to={`products/featured/${id}`}>
-            <h3> {brand} </h3>
-            <p> {shortText} </p>
-            <p> {catagory} </p>
-            <p> {model} </p>
-            <p> {newCar} </p>
-            <p> ${price} </p>
-          </Link>
-          <button>Add To Cart</button>
-        </aside>
-      </section> */}
       <section className="bigCard-container">
         <div className="flex flex-col p-4 justify-between">
           <div className="card-content">
@@ -93,9 +69,7 @@ const BigProductCart = ({ data }) => {
           />
         </div>
       </section>
-  
     </>
-
   );
 };
 
