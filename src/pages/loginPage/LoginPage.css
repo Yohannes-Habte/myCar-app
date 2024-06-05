@@ -1,3 +1,14 @@
+
+
+
+.customcolor{
+    background-color: #415a77;
+}
+
+.customfont{
+    font-family: "Poetsen One", sans-serif;
+}
+
 .sign-up,
 .login-link {
   color: var(--brandColor);
@@ -30,3 +41,4 @@
   margin-top: 4rem;
   color: var(--textLight);
 }
+

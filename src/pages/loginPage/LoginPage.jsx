@@ -37,51 +37,60 @@ const LoginPage = () => {
   };
 
   return (
-    <main>
-      <Header />
 
-      <section>
-        <h1 className="header-text"> Welcome to Your Account </h1>
+    <main className="flex justify-center align-middle">
+     <Header />
+    
+       <section className="flex flex-col justify-center h-lvh px-100">
+        <h1 className="text-3xl pb-4 text-center text-gray-600 text-bold customfont"> Welcome to Your Account </h1>
 
-        <form onSubmit={handleSubmit} className="form-container-login">
-          <div className="flex flex-col gap-1">
-            <label>Email</label>
+        <form onSubmit={handleSubmit} className="customcolor p-10 border-2 rounded-xl text-white">
+          <div className="flex flex-col mb-4">
+            <label className="text-sm">Email:</label>
             <input
               type="email"
               value={email}
-              placeholder="Your email"
               onChange={(e) => setEmail(e.target.value)}
-              className="border-none p-2 text-black rounded outline-none"
+              placeholder="Enter your email"
+              className="border-2 p-2 rounded-lg text-sm text-black outline-none"
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label>Password</label>
+
+          <div className="flex flex-col mb-20">
+            <label className="text-sm">Password:</label>
             <input
               type="password"
               value={password}
-              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              className="border-none mb-8 p-2 text-black rounded outline-none"
+              placeholder="Enter your password"
+              className="border-2 p-2 rounded-lg text-black outline-none text-sm"
             />
           </div>
-          {error && <p>{error}</p>}
-          <button
-            type="submit"
-            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
-          >
-            Login
-          </button>
+
+      
+          <button type="submit" className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] w-full py-2 rounded-3xl  bg-orange-400 font-bold text-white">Login</button>
+          
+          
         </form>
-        <p className="have-no-account">
-          Do not have an account?
-          <Link className="sign-up" to="/sign-up">
-            Sign Up
-          </Link>
-        </p>
+        <div className="have-no-account flex justify-between p-2 text-sm">
+          
+        <p className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] hover:cursor-pointer">
+            Do not have an account? 
+            <Link className="sign-in active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] text-gray-600 font-bold hover:cursor-pointer underline" to="/sign-up">
+               Sign Up
+            </Link>
+          </p>
+          <p className="font-bold text-gray-600 underline active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] hover:cursor-pointer"><link rel="stylesheet" href="" />Forget Password</p>
+          </div>
       </section>
+      
+
       <Footer />
+
     </main>
+    
   );
 };
+
 
 export default LoginPage;
