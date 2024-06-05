@@ -8,12 +8,13 @@ import { CartContext } from "../../../context/cart/CartProvider";
 import { toast } from "react-toastify";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 
-
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
 
   const [featuredCarInfo, setFeaturedCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const status = featuredCarInfo?.fields?.newCar === true? "New Car" : "Used Car"
 
   console.log("car info=", featuredCarInfo);
 
@@ -58,12 +59,7 @@ const FeaturedProductsDetails = () => {
   return loading ? (
     <PageLoader />
   ) : (
-
     <section className="mb-10 fituredCar-details-container">
-
-    
-      <h1> Featured Car Details </h1>
-
       <figure>
         <img
           className="single-page-car-image"
@@ -87,18 +83,15 @@ const FeaturedProductsDetails = () => {
             </p>
           </div>
           <div className="card-icon flex  items-center gap-1 rounded">
-            <button className="text-sm"> Add To Cart </button>
-            <FaCartPlus />
+            <button onClick={() => addToCartHandler(id)} className="text-sm"> Add To Cart </button>
+            <FaCartPlus onClick={() => addToCartHandler(id)} />
           </div>
         </div>
       </div>
       <div>
         <h3 className="font-semibold mt-6 px-2">Description</h3>
         <p className="my-2 px-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem unde
-          nisi recusandae temporibus fuga quae cum possimus nulla aliquam,
-          cumque molestiae id libero! Debitis dicta repudiandae quasi quisquam
-          odit sed?
+          {featuredCarInfo?.fields?.description?.content[0]?.content[0]?.value}
         </p>
       </div>
       <h3 className="font-semibold mt-6 px-2">Specificattion:</h3>
@@ -125,7 +118,7 @@ const FeaturedProductsDetails = () => {
         <div>
           <p className="bg-gray-200 py-2 px-1">
             {" "}
-            Status: {featuredCarInfo?.fields?.newCar}{" "}
+            Status: {status}
           </p>
           <p className="bg-gray-300 py-2 px-1">
             {" "}
@@ -140,7 +133,6 @@ const FeaturedProductsDetails = () => {
             Year: {featuredCarInfo?.fields?.year}{" "}
           </p>
         </div>
-
       </section>
     </section>
   );

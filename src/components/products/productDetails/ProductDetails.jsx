@@ -8,13 +8,13 @@ import { CartContext } from "../../../context/cart/CartProvider";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 
-
 const ProductDetails = () => {
   const { id } = useParams();
 
   const [carInfo, setCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log("Car description=", carInfo);
+
+  const status = carInfo?.fields?.newCar === true ? "New Car" : "Used Car";
 
   const singleCarDetails = async () => {
     try {
@@ -37,7 +37,6 @@ const ProductDetails = () => {
     return () => {};
   }, []);
 
-
   const { cartItems, dispatch } = useContext(CartContext);
 
   // Add to cart
@@ -57,7 +56,6 @@ const ProductDetails = () => {
       toast.success("Item added to cart successfully!");
     }
   };
-
 
   return loading ? (
     <div>
@@ -87,18 +85,18 @@ const ProductDetails = () => {
             </p>
           </div>
           <div className="card-icon flex  items-center gap-1 rounded">
-            <button className="text-sm"> Add To Cart </button>
-            <FaCartPlus />
+            <button onClick={() => addToCartHandler(id)} className="text-sm">
+              {" "}
+              Add To Cart{" "}
+            </button>
+            <FaCartPlus onClick={() => addToCartHandler(id)} />
           </div>
         </div>
       </div>
       <div>
         <h3 className="font-semibold mt-6 px-2">Description</h3>
         <p className="my-2 px-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem unde
-          nisi recusandae temporibus fuga quae cum possimus nulla aliquam,
-          cumque molestiae id libero! Debitis dicta repudiandae quasi quisquam
-          odit sed?
+          {carInfo?.fields?.description?.content[0]?.content[0]?.value}
         </p>
       </div>
       <h3 className="font-semibold mt-6 px-2">Specificattion:</h3>
@@ -123,10 +121,7 @@ const ProductDetails = () => {
           </p>
         </div>
         <div>
-          <p className="bg-gray-200 py-2 px-1">
-            {" "}
-            Status: {carInfo?.fields?.newCar}{" "}
-          </p>
+          <p className="bg-gray-200 py-2 px-1"> Status: {status}</p>
           <p className="bg-gray-300 py-2 px-1">
             {" "}
             Performance: {carInfo?.fields?.performance}{" "}
@@ -140,7 +135,6 @@ const ProductDetails = () => {
             Year: {carInfo?.fields?.year}{" "}
           </p>
         </div>
-
       </section>
     </section>
   );

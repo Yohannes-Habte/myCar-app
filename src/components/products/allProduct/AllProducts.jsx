@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import "./AllProducts.css";
-import SmallProductCart from "../smallProductCart/SmallProductCart";
 import GlobalFunction from "../../../utils/GlobalFunction";
 import PageLoader from "../../loader/PageLoader";
+import SmallProductCart from "../smallProductCart/SmallProductCart";
 
 const AllProducts = () => {
   const { loading, data, getProducts } = GlobalFunction();
 
-  console.log("data", data)
+  console.log("data", data);
 
   // Display data on browser
   useEffect(() => {

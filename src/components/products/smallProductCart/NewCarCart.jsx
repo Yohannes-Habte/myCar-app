@@ -6,7 +6,7 @@ import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 import { FaCartPlus } from "react-icons/fa";
 
-const SmallProductCart = ({ car }) => {
+const NewCarCart = ({ car }) => {
   const { cartItems, dispatch } = useContext(CartContext);
 
   // Add to cart
@@ -58,8 +58,9 @@ const SmallProductCart = ({ car }) => {
           </div>
         </Link>
       </div>
+   
     </section>
   );
 };
 
-export default SmallProductCart;
+export default NewCarCart;
