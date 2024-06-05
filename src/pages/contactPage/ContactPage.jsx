@@ -1,80 +1,116 @@
+import axios from "axios";
 import Footer from "../../components/layout/footer/Footer";
 import Header from "../../components/layout/header/Header";
 import "./ContactPage.css";
+import { useState } from "react";
 
 const ContactPage = () => {
-  return (
-   
-    <main className="flex justify-center align-middle">
-      <section className="flex flex-col justify-center h-lvh px-100">
-        <h1 className="text-2xl pb-4 text-bold text-gray-600 text-center customfont"> Contact with us</h1>
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    message: "",
+  });
 
-        <form /*onSubmit={handleSubmit} */ className="customcolor p-10 border-2 rounded-xl text-white">
-          <div className="flex flex-col mb-4 text-sm">
-            <label>Your Name:</label>
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const spaceId = import.meta.env.VITE_SPACE_ID;
+    const accessToken = import.meta.env.VITE_COMMENT_MGT_ACCESS_TOKEN;
+    const environmentId = "master";
+
+    const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
+
+    const entryData = {
+      fields: {
+        userName: {
+          "en-US": formData.userName,
+        },
+        email: {
+          "en-US": formData.email,
+        },
+        message: {
+          "en-US": formData.message,
+        },
+      },
+    };
+
+    try {
+      const { data } = await axios.post(url, entryData, {
+        headers: {
+          "Content-Type": "application/vnd.contentful.management.v1+json",
+          Authorization: `Bearer ${accessToken}`,
+          "X-Contentful-Content-Type": "comment",
+        },
+      });
+
+      console.log("Comment", data);
+      localStorage.setItem("comments", JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return ( 
+    <main>
+      <Header />
+      <section className="mb-20">
+        <h1 className="header-text"> Contact Us</h1>
+
+        <form onSubmit={handleSubmit} className="form-container">
+          <div className="flex flex-col gap-1">
+            <label>Full Name</label>
             <input
               type="text"
-              name="firstName"
-              // value={formData.firstName}
-              // onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Enter your name"
+              name="userName"
+              value={formData.userName}
+              placeholder="Your full name"
+              onChange={handleChange}
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-          {/* <div className="flex flex-col mb-4">
-            <label>Last Name:</label>
-            <input
-              type="text"
-              name="lastName"
-              // value={formData.lastName}
-              // onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Enter your last name"
-            />
-          </div> */}
-          <div className="flex flex-col mb-4 text-sm">
-            <label>Email:</label>
+
+          <div className="flex flex-col gap-1">
+            <label>Email Address </label>
             <input
               type="email"
               name="email"
-              // value={formData.email}
-              // onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Enter your email id"
-            />
-          </div>
-          <div className="flex flex-col mb-10 text-sm">
-            <label>Your Message:</label>
-            <textarea
-              type="text"
-              name="textarea"
-              // value={formData.password}
-              // onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Write your message"
-            />
-          </div>
-          {/* <div>
-            <label>Phone:</label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
+              value={formData.email}
+              placeholder="Your email address"
               onChange={handleChange}
-              className="border-2"
+              className="border-none p-2 text-black rounded outline-none"
             />
-          </div> */}
-          <button type="submit" className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] w-full py-2 rounded-3xl  bg-orange-400 font-bold text-white">Send</button>
+          </div>
 
-          
+          <div className="flex flex-col gap-1">
+            <label htmlFor="message">Text Message </label>
+            <textarea
+              name="message"
+              id="message"
+              rows="6"
+              cols="50"
+              value={formData.message}
+              placeholder="Your message"
+              onChange={handleChange}
+              className="border-none mb-8 p-2 text-black rounded outline-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+          >
+            Send your message
+          </button>
         </form>
-        {/* <p className="have-no-account flex text-sm p-2 active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] hover:cursor-pointer">
-            Already have an account?
-            <Link className="sign-up active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] text-gray-600 font-bold hover:cursor-pointer underline" to="/login">
-              Log In
-            </Link>
-          </p> */}
       </section>
+
     </main>
     
   );

@@ -3,8 +3,8 @@ import { createContext } from "react";
 import UserReducer from "./UserReducer";
 
 const initialState = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
+  user: localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
     : null,
   loading: false,
   error: null,

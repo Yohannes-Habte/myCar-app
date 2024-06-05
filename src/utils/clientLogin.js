@@ -7,7 +7,6 @@ const client = createClient({
   accessToken: ACCESS_TOKEN,
 });
 
-
 export const loginToContentful = async (email, password) => {
   // Simulate login process
   const isValidUser = email === email && password === password;
@@ -18,9 +17,13 @@ export const loginToContentful = async (email, password) => {
 
   const space = await client.getSpace(SPACE_ID);
   const environment = await space.getEnvironment("master");
-  const entries = await environment.getEntries();
+  const entries = await environment.getEntries({
+    content_type: "user",
+    limit: 1,
+    skip: 0,
+  });
 
-  return entries;
+  const userData = entries.items;
+
+  return userData;
 };
-
-

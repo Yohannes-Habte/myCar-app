@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import "./SignUpPage.css";
 import { Link } from "react-router-dom";
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
+import { UserContext } from "../../context/user/UserProvider";
+import { USER_ACTION } from "../../context/user/UserReducer";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
+  const { dispatch } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -24,7 +31,7 @@ const SignUpPage = () => {
 
     const spaceId = import.meta.env.VITE_SPACE_ID;
     const accessToken = import.meta.env.VITE_MGT_ACCESS_TOKEN;
-    const environmentId = "master"; 
+    const environmentId = "master";
 
     const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
 
@@ -42,14 +49,12 @@ const SignUpPage = () => {
         password: {
           "en-US": formData.password,
         },
-        phone: {
-          "en-US": formData.phone,
-        },
       },
     };
 
     try {
-      const response = await axios.post(url, entryData, {
+      dispatch({ type: USER_ACTION.SIGN_UP_START });
+      const { data } = await axios.post(url, entryData, {
         headers: {
           "Content-Type": "application/vnd.contentful.management.v1+json",
           Authorization: `Bearer ${accessToken}`,
@@ -57,19 +62,29 @@ const SignUpPage = () => {
         },
       });
 
-      console.log("Entry created successfully:", response.data);
+      dispatch({
+        type: USER_ACTION.SIGN_UP_SUCCESS,
+        payload: data,
+      });
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      console.error("Error creating entry:", error);
+      dispatch({
+        type: USER_ACTION.SIGN_UP_FAIL,
+        payload: toast.error(error.response.data.message),
+      });
     }
   };
 
   return (
+
     <main className="flex justify-center align-middle">
+     <Header />
       <section className="flex flex-col justify-center h-lvh px-100">
         <h1 className="text-2xl pb-4 text-bold text-gray-600 text-center customfont"> Create Account for Free </h1>
 
         <form onSubmit={handleSubmit} className="customcolor p-10 border-2 rounded-xl text-white">
           <div className="flex flex-col mb-4 text-sm">
+
             <label>First Name:</label>
             <input
               type="text"
@@ -80,6 +95,7 @@ const SignUpPage = () => {
               placeholder="Enter your first name"
             />
           </div>
+
           <div className="flex flex-col mb-4 text-sm">
             <label>Last Name:</label>
             <input
@@ -91,6 +107,8 @@ const SignUpPage = () => {
               placeholder="Enter your last name"
             />
           </div>
+
+
           <div className="flex flex-col mb-4 text-sm">
             <label>Email:</label>
             <input
@@ -102,6 +120,8 @@ const SignUpPage = () => {
               placeholder="Enter your email id"
             />
           </div>
+
+
           <div className="flex flex-col mb-20 text-sm">
             <label>Password:</label>
             <input
@@ -113,16 +133,7 @@ const SignUpPage = () => {
               placeholder="Set your password"
             />
           </div>
-          {/* <div>
-            <label>Phone:</label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="border-2"
-            />
-          </div> */}
+         
           <button type="submit" className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] w-full py-2 rounded-3xl  bg-orange-400 font-bold text-white">Sign Up</button>
 
           
@@ -133,7 +144,9 @@ const SignUpPage = () => {
               Log In
             </Link>
           </p>
+           
       </section>
+      <Footer />
     </main>
   );
 };

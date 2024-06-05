@@ -3,7 +3,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 const override = {
   display: "block",
   margin: "0 auto",
-  borderColor: "red",
+  borderColor: "black",
 };
 
 const PageLoader = () => {

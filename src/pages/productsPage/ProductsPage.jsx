@@ -7,8 +7,8 @@ const ProductsPage = () => {
   return (
     <main>
       <Header />
-      <section className="px-20">
-        <h1> All Our Products </h1>
+      <section className="container m-auto">
+        <h1 className="all-products-text"> All Our Products </h1>
 
         <AllProducts />
       </section>

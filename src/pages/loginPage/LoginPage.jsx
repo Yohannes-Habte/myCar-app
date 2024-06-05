@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { loginToContentful } from "../../utils/clientLogin";
-
+import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
+import { UserContext } from "../../context/user/UserProvider";
+import { USER_ACTION } from "../../context/user/UserReducer";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -13,15 +18,29 @@ const LoginPage = () => {
     e.preventDefault();
     setError(null);
     try {
+      dispatch({ type: USER_ACTION.LOGIN_START });
+
       await loginToContentful(email, password);
-      // Handle successful login
+
+      dispatch({
+        type: USER_ACTION.LOGIN_SUCCESS,
+        payload: { email, password },
+      });
+
+      localStorage.setItem("userInfo", JSON.stringify({ email, password }));
     } catch (err) {
-      setError("Invalid credentials");
+      dispatch({
+        type: USER_ACTION.LOGIN_FAIL,
+        payload: toast.error(err.message),
+      });
     }
   };
 
   return (
+
     <main className="flex justify-center align-middle">
+     <Header />
+    
        <section className="flex flex-col justify-center h-lvh px-100">
         <h1 className="text-3xl pb-4 text-center text-gray-600 text-bold customfont"> Welcome to Your Account </h1>
 
@@ -36,8 +55,9 @@ const LoginPage = () => {
               className="border-2 p-2 rounded-lg text-sm text-black outline-none"
             />
           </div>
+
           <div className="flex flex-col mb-20">
-            <label>Password:</label>
+            <label className="text-sm">Password:</label>
             <input
               type="password"
               value={password}
@@ -46,7 +66,8 @@ const LoginPage = () => {
               className="border-2 p-2 rounded-lg text-black outline-none text-sm"
             />
           </div>
-          {error && <p>{error}</p>}
+
+      
           <button type="submit" className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] w-full py-2 rounded-3xl  bg-orange-400 font-bold text-white">Login</button>
           
           
@@ -63,6 +84,9 @@ const LoginPage = () => {
           </div>
       </section>
       
+
+      <Footer />
+
     </main>
     
   );

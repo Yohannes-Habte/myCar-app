@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import "./SmallProductCart.css";
 import { useContext } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 import { FaCartPlus } from "react-icons/fa";
 
-const SmallProductCart = ({ car }) => {
+const UsedCarCart = ({ car }) => {
   const { cartItems, dispatch } = useContext(CartContext);
 
   // Add to cart
@@ -37,7 +36,6 @@ const SmallProductCart = ({ car }) => {
   const shortText = shortDescription.concat("...");
 
   return (
-
     <section className="cart-product-container">
       <Link to={`/products/${id}`}>
         <figure>
@@ -59,9 +57,9 @@ const SmallProductCart = ({ car }) => {
           </div>
         </Link>
       </div>
+      {/* <button>Add To Cart</button> */}
     </section>
-
   );
 };
 
-export default SmallProductCart;
+export default UsedCarCart;
