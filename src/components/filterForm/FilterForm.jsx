@@ -1,164 +1,159 @@
 import "./FilterForm.css";
-import { useState } from "react";
+import { useEffect } from "react";
 
-const FilterForm = () => {
-  const [topping, setTopping] = useState("New");
-  const onOptionChange = (e) => {
-    setTopping(e.target.value);
+const FilterForm = ({
+  data,
+  getData,
+  filters,
+  updateChange,
+  getBrand,
+  reset,
+  setBrands,
+}) => {
+  const { brand, power, year, color, price, fuel } = filters;
+  useEffect(() => {
+    getData("cars", 45, 0);
+
+    return () => {};
+  }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    getBrand(brand).then((res) => setBrands(res));
+
+    reset();
   };
+
   return (
-    <div className="filter-container">
-      <div className="filter-left">
+    <form className="filter-container">
+      <div className="inputs-wrapper">
+        {/* Brand */}
         <div className="flex flex-col gap-1 mb-3">
-          <label htmlFor="brand-select" className="text-white">
+          <label htmlFor="brand" className="text-white">
             Brand
           </label>
-          <select
+
+          <input
+            type="text"
             name="brand"
-            id="brand-select"
+            id="brand"
+            value={brand}
+            onChange={updateChange}
+            placeholder="Car Brand"
             className="h-8 p-1 rounded outline-none cursor-pointer"
-          >
-            <option value="">All cars</option>
-            <option value="bmw">BMW</option>
-            <option value="ford">Ford</option>
-            <option value="mercedez">Mercedez</option>
-          </select>
+          />
         </div>
+
+        {/* Power */}
         <div className="flex flex-col gap-1 mb-3">
-          <label htmlFor="brand-select" className="text-white">
+          <label htmlFor="power" className="text-white">
             Power
           </label>
           <select
-            name="brand"
-            id="brand-select"
+            name="power"
+            id="power"
+            value={power}
+            onChange={updateChange}
             className="h-8 p-1 rounded outline-none cursor-pointer"
           >
             <option value="">All</option>
-            <option value="power">90 PS</option>
-            <option value="power">150 PS</option>
-            <option value="power">220 PS</option>
+            {data &&
+              data.map((car) => {
+                return (
+                  <option key={car?.sys?.id} value={car?.sys?.id}>
+                    {" "}
+                    {car.fields.transmission} ps{" "}
+                  </option>
+                );
+              })}
           </select>
         </div>
+
+        {/* Year */}
+
         <div className="flex flex-col gap-1 mb-3">
-          <label htmlFor="brand-select" className="text-white">
+          <label htmlFor="year" className="text-white">
             Year
           </label>
-          <select
-            name="brand"
-            id="brand-select"
+          <input
+            type="text"
+            name="year"
+            id="year"
+            value={year}
+            onChange={updateChange}
+            placeholder="Year"
             className="h-8 p-1 rounded outline-none cursor-pointer"
-          >
-            <option value="">All</option>
-            <option value="year">2024</option>
-            <option value="year">2023</option>
-            <option value="year">2022</option>
-            <option value="year">2021</option>
-            <option value="year">2020</option>
-          </select>
+          />
         </div>
-      </div>
-      <div className="filter-middle">
+
+        {/* Color */}
+
         <div className="flex flex-col gap-1 mb-3">
-          <label htmlFor="brand-select" className="text-white">
+          <label htmlFor="color" className="text-white">
             Color
           </label>
-          <select
-            name="brand"
-            id="brand-select"
+          <input
+            type="text"
+            name="color"
+            id="selectedColor"
+            value={color}
+            onChange={updateChange}
+            placeholder="Color"
             className="h-8 p-1 rounded outline-none cursor-pointer"
-          >
-            <option value="">All colors</option>
-            <option value="bmw">Black</option>
-            <option value="ford">Silver</option>
-            <option value="mercedez">Red</option>
-          </select>
+          />
         </div>
-        <div className="flex flex-col gap-1 mb-10">
-          <label htmlFor="brand-select" className="text-white">
+
+        {/* Price */}
+
+        <div className="flex flex-col gap-1 mb-3">
+          <label htmlFor="price" className="text-white">
             Price
           </label>
-          <select
-            name="brand"
-            id="brand-select"
+          <input
+            type="text"
+            name="price"
+            id="price"
+            value={price}
+            onChange={updateChange}
+            placeholder="Price"
             className="h-8 p-1 rounded outline-none cursor-pointer"
-          >
-            <option value="">All Price</option>
-            <option value="price">1000 - 10000 Euro</option>
-            <option value="price">10000 - 20000 Euro</option>
-            <option value="price">20000 - 30000 Euro</option>
-            <option value="price">30000 - 40000 Euro</option>
-            <option value="price">40000 and more</option>
-          </select>
+          />
         </div>
-        <div className="flex car-condition items-center justify-between">
-          <div>
-            <p>Condition</p>
-          </div>
 
-          <div className="flex gap-3">
-            <div className="flex gap-1 cursor-pointer">
-              <input
-                type="radio"
-                name="topping"
-                value="New"
-                id="new"
-                checked={topping === "New"}
-                onChange={onOptionChange}
-              />
-              <label htmlFor="new" className="cursor-pointer">
-                New
-              </label>
-            </div>
-            <div className="flex gap-1">
-              <input
-                type="radio"
-                name="topping"
-                value="Used"
-                id="used"
-                checked={topping === "Used"}
-                onChange={onOptionChange}
-              />
-              <label htmlFor="used" className="cursor-pointer">
-                Used
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="filter-right">
+        {/* Fuel */}
         <div className="flex flex-col gap-1 mb-3">
-          <label htmlFor="brand-select" className="text-white">
+          <label htmlFor="fuel" className="text-white">
             Fuel
           </label>
-          <select
-            name="brand"
-            id="brand-select"
+          <input
+            type="text"
+            name="fuel"
+            id="fuel"
+            value={fuel}
+            onChange={updateChange}
+            placeholder="Fuel Type"
             className="h-8 p-1 rounded outline-none cursor-pointer"
-          >
-            <option value="">All </option>
-            <option value="fuel">Petrol</option>
-            <option value="fuel">Diesel</option>
-            <option value="fuel">Electric</option>
-            <option value="fuel">Hybride</option>
-          </select>
+          />
         </div>
-        <div className="flex flex-col gap-1 mb-10">
-          <label htmlFor="brand-select" className="text-white">
-            Transmission
-          </label>
-          <select
-            name="brand"
-            id="brand-select"
-            className="h-8 p-1 rounded outline-none cursor-pointer"
-          >
-            <option value="">All transmission</option>
-            <option value="btransmission">Automation</option>
-            <option value="btransmission">Manual</option>
-          </select>
-        </div>
-        <div className="offers">We have 145 offers</div>
       </div>
-    </div>
+
+      <div className="offers-button-wrapper">
+        <div className="offers">
+          We have 145 offers and you have the option to get your desire using
+          the filter
+        </div>
+        <button onClick={handleSearch} className="filter-btn">
+          {" "}
+          Filter{" "}
+        </button>
+
+        <button onClick={reset} className="filter-btn">
+          {" "}
+          Reset{" "}
+        </button>
+      </div>
+    </form>
   );
 };
 

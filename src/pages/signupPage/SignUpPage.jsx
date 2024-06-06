@@ -16,7 +16,6 @@ const SignUpPage = () => {
     lastName: "",
     email: "",
     password: "",
-    phone: "",
   });
 
   const handleChange = (e) => {

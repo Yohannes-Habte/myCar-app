@@ -17,3 +17,11 @@
 
 }
 }
+
+.filter-result-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1rem;
+  grid-row: 1rem;
+  margin-top: 1rem;
+}
