@@ -61,7 +61,11 @@ const ContactPage = () => {
     <main>
       <Header />
       <section className="mb-20">
-        <h1 className="header-text"> Contact Us</h1>
+        <h1 className="header-text"> Didn't find the right car?</h1>
+        <p className="text-center">
+          Simply write to us with the desired model and car name, we will
+          provide your desired car !
+        </p>
 
         <form onSubmit={handleSubmit} className="form-container">
           <div className="flex flex-col gap-1">
