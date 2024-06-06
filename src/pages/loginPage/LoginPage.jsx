@@ -7,26 +7,21 @@ import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
-
 const LoginPage = () => {
   const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     try {
       dispatch({ type: USER_ACTION.LOGIN_START });
-
       await loginToContentful(email, password);
-
       dispatch({
         type: USER_ACTION.LOGIN_SUCCESS,
         payload: { email, password },
       });
-
       localStorage.setItem("userInfo", JSON.stringify({ email, password }));
     } catch (err) {
       dispatch({
@@ -35,62 +30,49 @@ const LoginPage = () => {
       });
     }
   };
-
   return (
-
-    <main className="flex justify-center align-middle">
-     <Header />
-    
-       <section className="flex flex-col justify-center h-lvh px-100">
-        <h1 className="text-3xl pb-4 text-center text-gray-600 text-bold customfont"> Welcome to Your Account </h1>
-
-        <form onSubmit={handleSubmit} className="customcolor p-10 border-2 rounded-xl text-white">
-          <div className="flex flex-col mb-4">
-            <label className="text-sm">Email:</label>
+    <main>
+      <Header />
+      <section>
+        <h1 className="header-text"> Welcome to Your Account </h1>
+        <form onSubmit={handleSubmit} className="form-container-login">
+          <div className="flex flex-col gap-1">
+            <label>Email</label>
             <input
               type="email"
               value={email}
+              placeholder="Your email"
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="border-2 p-2 rounded-lg text-sm text-black outline-none"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-
-          <div className="flex flex-col mb-20">
-            <label className="text-sm">Password:</label>
+          <div className="flex flex-col gap-1">
+            <label>Password</label>
             <input
               type="password"
               value={password}
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              className="border-2 p-2 rounded-lg text-black outline-none text-sm"
+              className="border-none mb-8 p-2 text-black rounded outline-none"
             />
           </div>
-
-      
-          <button type="submit" className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] w-full py-2 rounded-3xl  bg-orange-400 font-bold text-white">Login</button>
-          
-          
+          {error && <p>{error}</p>}
+          <button
+            type="submit"
+            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+          >
+            Login
+          </button>
         </form>
-        <div className="have-no-account flex justify-between p-2 text-sm">
-          
-        <p className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] hover:cursor-pointer">
-            Do not have an account? 
-            <Link className="sign-in active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] text-gray-600 font-bold hover:cursor-pointer underline" to="/sign-up">
-               Sign Up
-            </Link>
-          </p>
-          <p className="font-bold text-gray-600 underline active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] hover:cursor-pointer"><link rel="stylesheet" href="" />Forget Password</p>
-          </div>
+        <p className="have-no-account">
+          Do not have an account?
+          <Link className="sign-up" to="/sign-up">
+            Sign Up
+          </Link>
+        </p>
       </section>
-      
-
       <Footer />
-
     </main>
-    
   );
 };
-
-
 export default LoginPage;

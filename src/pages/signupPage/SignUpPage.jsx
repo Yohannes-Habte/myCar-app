@@ -7,33 +7,26 @@ import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
-
 const SignUpPage = () => {
   const { dispatch } = useContext(UserContext);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const spaceId = import.meta.env.VITE_SPACE_ID;
     const accessToken = import.meta.env.VITE_MGT_ACCESS_TOKEN;
     const environmentId = "master";
-
     const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
-
     const entryData = {
       fields: {
         firstName: {
@@ -50,7 +43,6 @@ const SignUpPage = () => {
         },
       },
     };
-
     try {
       dispatch({ type: USER_ACTION.SIGN_UP_START });
       const { data } = await axios.post(url, entryData, {
@@ -60,7 +52,6 @@ const SignUpPage = () => {
           "X-Contentful-Content-Type": "user",
         },
       });
-
       dispatch({
         type: USER_ACTION.SIGN_UP_SUCCESS,
         payload: data,
@@ -73,81 +64,72 @@ const SignUpPage = () => {
       });
     }
   };
-
   return (
-
-    <main className="flex justify-center align-middle">
-     <Header />
-      <section className="flex flex-col justify-center h-lvh px-100">
-        <h1 className="text-2xl pb-4 text-bold text-gray-600 text-center customfont"> Create Account for Free </h1>
-
-        <form onSubmit={handleSubmit} className="customcolor p-10 border-2 rounded-xl text-white">
-          <div className="flex flex-col mb-4 text-sm">
-
+    <main>
+      <Header />
+      <section className="login-page-container">
+        <h1 className="header-text"> Create Account for Free </h1>
+        <form onSubmit={handleSubmit} className="form-container-signup">
+          <div className="flex flex-col gap-1">
             <label>First Name:</label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
+              placeholder="Your first name"
               onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Enter your first name"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-
-          <div className="flex flex-col mb-4 text-sm">
+          <div className="flex flex-col gap-1">
             <label>Last Name:</label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
+              placeholder="Your last name"
               onChange={handleChange}
-              className="border-2 p-2 rounded-md "
-              placeholder="Enter your last name"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-
-
-          <div className="flex flex-col mb-4 text-sm">
+          <div className="flex flex-col gap-1">
             <label>Email:</label>
             <input
               type="email"
               name="email"
               value={formData.email}
+              placeholder="Your email address"
               onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Enter your email id"
+              className="border-none p-2 text-black rounded outline-none"
             />
           </div>
-
-
-          <div className="flex flex-col mb-20 text-sm">
+          <div className="flex flex-col gap-1">
             <label>Password:</label>
             <input
               type="password"
               name="password"
               value={formData.password}
+              placeholder="Create your password"
               onChange={handleChange}
-              className="border-2 p-2 rounded-md"
-              placeholder="Set your password"
+              className="border-none p-2 text-black rounded outline-none mb-8"
             />
           </div>
-         
-          <button type="submit" className="active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] w-full py-2 rounded-3xl  bg-orange-400 font-bold text-white">Sign Up</button>
-
-          
+          <button
+            type="submit"
+            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+          >
+            Sign Up
+          </button>
         </form>
-        <p className="have-no-account flex text-sm p-2 active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] hover:cursor-pointer">
-            Already have an account?
-            <Link className="sign-up active:scale[.98] active:duration-75 ease-in-out hover:scale-[1.05] text-gray-600 font-bold hover:cursor-pointer underline" to="/login">
-              Log In
-            </Link>
-          </p>
-           
+        <p className="have-account">
+          Already have an account?
+          <Link className="login-link" to="/login">
+            Log In
+          </Link>
+        </p>
       </section>
       <Footer />
     </main>
   );
 };
-
 export default SignUpPage;
