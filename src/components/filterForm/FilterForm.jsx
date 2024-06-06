@@ -148,7 +148,7 @@ const FilterForm = ({
           Filter{" "}
         </button>
 
-        <button onClick={reset} className="filter-btn">
+        <button onClick={reset} className="py-1 px-2 bg-gray-400 rounded">
           {" "}
           Reset{" "}
         </button>
