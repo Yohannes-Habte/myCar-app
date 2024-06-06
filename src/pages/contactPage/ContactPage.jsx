@@ -57,7 +57,7 @@ const ContactPage = () => {
     }
   };
 
-  return ( 
+  return (
     <main>
       <Header />
       <section className="mb-20">
@@ -114,9 +114,8 @@ const ContactPage = () => {
           </button>
         </form>
       </section>
-
+      <Footer />
     </main>
-    
   );
 };
 

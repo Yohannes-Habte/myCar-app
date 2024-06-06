@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import "./FilterForm.css";
 import { useEffect } from "react";
 
@@ -17,6 +18,7 @@ const FilterForm = ({
     return () => {};
   }, []);
 
+  // Handle search
   const handleSearch = (e) => {
     e.preventDefault();
 

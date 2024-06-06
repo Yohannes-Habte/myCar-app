@@ -87,3 +87,20 @@
   max-width: 600px;
   margin: 0 auto 40rem;
 }
+
+@media screen and (max-width: 677px) {
+  .cart-main-section-container {
+    width: 100%;
+  }
+
+  .empty-cart {
+    width: 95%;
+    margin: auto;
+    padding: 1rem 0;
+  }
+
+  .ordered-items {
+    display: flex;
+    flex-direction: column;
+  }
+}

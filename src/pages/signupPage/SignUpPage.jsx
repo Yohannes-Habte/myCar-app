@@ -7,25 +7,42 @@ import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+};
+
 const SignUpPage = () => {
   const { dispatch } = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+
+  const [formData, setFormData] = useState(initialState);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+
+  const reset = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const spaceId = import.meta.env.VITE_SPACE_ID;
     const accessToken = import.meta.env.VITE_MGT_ACCESS_TOKEN;
     const environmentId = "master";
+    
     const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
     const entryData = {
       fields: {
@@ -57,6 +74,8 @@ const SignUpPage = () => {
         payload: data,
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
+
+      reset()
     } catch (error) {
       dispatch({
         type: USER_ACTION.SIGN_UP_FAIL,

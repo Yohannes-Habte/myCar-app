@@ -26,3 +26,11 @@
   }
 }
 
+@media screen and (max-width: 677px) {
+  
+  .form-container-signup {
+    width: 95vw;
+    margin: auto;
+  }
+}
+

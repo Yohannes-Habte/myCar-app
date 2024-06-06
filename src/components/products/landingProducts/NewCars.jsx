@@ -16,7 +16,7 @@ const NewCars = () => {
   }, []);
   return (
     <section>
-      <div className="flex justify-between mb-3 mt-36">
+      <div className="flex justify-between mb-3 mt-20">
         <h4 className="new-car-text">New luxury car</h4>
         <h4 className="show-more-text">Show more</h4>
       </div>{" "}

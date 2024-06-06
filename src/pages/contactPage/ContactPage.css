@@ -34,3 +34,12 @@
   }
 }
 
+@media screen and (max-width: 677px) {
+  
+  .form-container {
+    width: 95vw;
+    margin: auto;
+  }
+}
+
+

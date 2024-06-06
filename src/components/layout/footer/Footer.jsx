@@ -12,8 +12,8 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="px-48 py-5 bg-neutral-700 text-white text-md">
-      <section className="flex justify-between px-5 py-8 bg-neutral-700 text-white">
+    <footer className="footer-wrapper">
+      <section className="footer-asides-wrapper">
         <aside>
           <h3 className="text-2xl font-bold pb-6 text-gray-400 customfont">Our Services</h3>
           <ul className="">
@@ -73,7 +73,7 @@ const Footer = () => {
           </ul>
         </aside>
       </section>
-      <p className="bg-neutral-800 w-full p-6 text-center text-sm">All rights reserved @ myCar 2024 </p>
+      <p className="copy-wright w-full p-6 text-center text-sm">All rights reserved @ myCar 2024. This project is created by Mehedi, Ali & Yohannes </p>
     </footer>
   );
 };

@@ -11,8 +11,7 @@ import UsedCars from "../../components/products/landingProducts/UsedCars";
 import NewCars from "../../components/products/landingProducts/NewCars";
 import Services from "../../components/services/Services";
 import { clientProducts } from "../../utils/clientProducts";
-import { Link } from "react-router-dom";
-import { FaCartPlus } from "react-icons/fa";
+import SearchResultCart from "../../components/products/searchResultCart/SearchResultCart";
 
 // Search car brand
 const getBrand = async (brand) => {
@@ -26,8 +25,6 @@ const getBrand = async (brand) => {
     console.error(error.message);
   }
 };
-
-
 
 const initialState = {
   brand: "",
@@ -46,8 +43,6 @@ const HomePage = () => {
   // Local state variable
   const [filters, setFilters] = useState(initialState);
   const [brands, setBrands] = useState([]);
-
-  console.log("brands=", brands);
 
   const updateChange = (e) => {
     const { name, value } = e.target;
@@ -73,6 +68,7 @@ const HomePage = () => {
     return () => {};
   }, []);
 
+  // Carousel data
   const cardsData = data.map((featuredCar) => (
     <BigProductCart key={featuredCar?.sys.id} data={featuredCar} />
   ));
@@ -94,52 +90,13 @@ const HomePage = () => {
           brands={brands}
           setBrands={setBrands}
           getBrand={getBrand}
-        
         />
 
         <div className="filter-result-wrapper">
           {brands &&
-        
             brands?.map((car) => {
-              const {
-                fields: { brand, description, model, price, year, image },
-                sys: { id },
-              } = car;
-              return (
-                <section key={id} className="cart-product-container">
-                  <Link to={`/products/${id}`}>
-                    <figure>
-                      <img
-                        className="car-image"
-                        src={image.fields.file.url}
-                        alt={brand}
-                      />
-                    </figure>
-                    <h3 className="header-smallCard"> {brand} </h3>
-                    <p className="sub-title-text"> {model} </p>
-                    <p> Year: {year.slice(0, 4)} </p>
-                    <p>
-                      {description.content[0].content[0].value
-                        .slice(0, 139)
-                        .concat("...")}
-                      <span className="text-red-500">read more</span>{" "}
-                    </p>
-                  </Link>
-                  <div className="flex justify-between mt-6">
-                    <p className="bg-gray-200 py-1 px-2 rounded">
-                      {" "}
-                      Price: ${price}{" "}
-                    </p>
-                    <Link>
-                      <div className="card-icon">
-                        <FaCartPlus />
-                      </div>
-                    </Link>
-                  </div>
-                </section>
-              );
-            })} 
-            
+              return <SearchResultCart key={car.sys.id} car={car} />;
+            })}
         </div>
 
         {loading ? (

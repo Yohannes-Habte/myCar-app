@@ -14,8 +14,28 @@
 }
 
 .service-img {
-  width: 90vw;
   max-width: 900px;
   margin: auto;
   border-radius: 0.8rem;
 }
+
+.service-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+}
+
+@media screen and (max-width: 677px) {
+  .service-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .service-img img {
+    max-width: 300px;
+    margin: auto;
+    border-radius: 0.8rem;
+  }
+  
+}
+

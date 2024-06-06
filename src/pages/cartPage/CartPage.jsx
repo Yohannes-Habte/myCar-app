@@ -39,7 +39,7 @@ const CartPage = () => {
           </p>
         ) : (
           <section>
-            <div className="flex gap-3 justify-between">
+            <div className="ordered-items flex gap-3 justify-between">
               <div className="items-container">
                 {cartItems.map((item) => {
                   const {
@@ -108,6 +108,7 @@ const CartPage = () => {
                   );
                 })}
               </div>
+
               <div className="bg-gray-500 text-white price-comtainer flex flex-col justify-between">
                 <div>
                   <div>
@@ -136,6 +137,7 @@ const CartPage = () => {
                   Checkout
                 </button>
               </div>
+
             </div>
           </section>
         )}

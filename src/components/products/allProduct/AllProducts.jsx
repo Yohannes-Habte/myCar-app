@@ -7,7 +7,7 @@ import SmallProductCart from "../smallProductCart/SmallProductCart";
 const AllProducts = () => {
   const { loading, data, getProducts } = GlobalFunction();
 
-  console.log("data", data);
+  console.log("all cars data =", data);
 
   // Display data on browser
   useEffect(() => {

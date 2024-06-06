@@ -11,17 +11,22 @@ import { toast } from "react-toastify";
 const ProductDetails = () => {
   const { id } = useParams();
 
+  // Global variables
+  const { cartItems, dispatch } = useContext(CartContext);
+
+  // Local variables
   const [carInfo, setCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const status = carInfo?.fields?.newCar === true ? "New Car" : "Used Car";
 
+
+  // Fetch single product
   const singleCarDetails = async () => {
     try {
       setLoading(true);
       const data = await clientProducts.getEntry(id);
       setCarInfo(data);
-      console.log(data);
 
       setLoading(false);
     } catch (error) {
@@ -37,7 +42,7 @@ const ProductDetails = () => {
     return () => {};
   }, []);
 
-  const { cartItems, dispatch } = useContext(CartContext);
+
 
   // Add to cart
   const addToCartHandler = async (id) => {

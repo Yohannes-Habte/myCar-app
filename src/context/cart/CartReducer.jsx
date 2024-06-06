@@ -5,8 +5,10 @@ export const CART_ACTION = {
 
 const CartReducer = (state, action) => {
   switch (action.type) {
+
     // Add item to cart
     case CART_ACTION.ADD_ITEM_TO_CART: {
+      
       const newItem = action.payload;
 
       const existingItem = state.cartItems.find(

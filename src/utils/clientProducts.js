@@ -5,11 +5,3 @@ export const clientProducts = createClient({
   environment: "master",
   accessToken: import.meta.env.VITE_ACCESS_TOKEN,
 });
-
-
-
-export const clientAbout = createClient({
-  space: import.meta.env.VITE_SPACE_ID,
-  environment: "master",
-  accessToken: import.meta.env.VITE_ACCESS_TOKEN,
-});

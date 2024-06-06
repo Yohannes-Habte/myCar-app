@@ -42,3 +42,12 @@
   color: var(--textLight);
 }
 
+@media screen and (max-width: 677px) {
+  
+  .form-container-login {
+    width: 95vw;
+    margin: auto;
+  }
+}
+
+

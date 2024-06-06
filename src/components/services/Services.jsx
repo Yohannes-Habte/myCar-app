@@ -8,7 +8,8 @@ const Services = () => {
       <div className="service-img">
         <img src=".././img4.jpg" alt="image" className="rounded-lg" />
       </div>
-      <div className="grid container m-auto py-4 mb-4 grid-cols-2 gap-4 max-w-screen-lg">
+
+      <div className="service-wrapper container m-auto py-4 mb-4 gap-4 max-w-screen-lg">
         <div>
           <p className="px-2 py-2">
             As a trusted car seller, we are dedicated to helping you find the
@@ -26,24 +27,22 @@ const Services = () => {
         </div>
 
         <div>
-          <div>
-            <ul className="list-disc">
-              <li className="pb-2">
-                Competitive pricing, and exceptional customer service ensure a
-                seamless and satisfying car-buying experience.
-              </li>
-              <li className="pb-2">
-                Experience top-notch car maintenance and repair with our expert
-                team, ensuring your vehicle runs smoothly and safely on every
-                journey.
-              </li>
-              <li className="pb-2">
-                Our comprehensive range of services, from routine maintenance
-                and oil changes to complex engine diagnostics and repairs, is
-                designed to meet the needs of all makes and models.
-              </li>
-            </ul>
-          </div>
+          <ul className="list-disc">
+            <li className="pb-2">
+              Competitive pricing, and exceptional customer service ensure a
+              seamless and satisfying car-buying experience.
+            </li>
+            <li className="pb-2">
+              Experience top-notch car maintenance and repair with our expert
+              team, ensuring your vehicle runs smoothly and safely on every
+              journey.
+            </li>
+            <li className="pb-2">
+              Our comprehensive range of services, from routine maintenance and
+              oil changes to complex engine diagnostics and repairs, is designed
+              to meet the needs of all makes and models.
+            </li>
+          </ul>
         </div>
       </div>
     </section>
