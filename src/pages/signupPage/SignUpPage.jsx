@@ -16,7 +16,6 @@ const SignUpPage = () => {
     lastName: "",
     email: "",
     password: "",
-    phone: "",
   });
 
   const handleChange = (e) => {
@@ -48,9 +47,6 @@ const SignUpPage = () => {
         },
         password: {
           "en-US": formData.password,
-        },
-        phone: {
-          "en-US": formData.phone,
         },
       },
     };
